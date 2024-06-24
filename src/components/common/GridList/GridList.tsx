@@ -23,7 +23,7 @@ const GridList = <T extends { id?: number }>({
             {renderItem(record)}
           </Col>
         ))
-      : "there are no records";
+      : "there are no records ䷢";
 
   return <Row>{renderList}</Row>;
 };
