@@ -1,4 +1,11 @@
-const Heading = ({className, children }: {className?: string, children: React.ReactNode }) => {
+import React from "react";
+
+type HeadingProps = {
+  className?: string;
+  children: React.ReactNode;
+};
+
+const Heading = ({ className, children }: HeadingProps) => {
   return (
     <h2 className={`mb-3 ${className ?? ""}`} style={{ fontSize: "26px" }}>
       {children}

@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { HeaderBasket } from "../../eCommerce";
 import { Badge, Navbar, Nav, Container } from "react-bootstrap";
 
@@ -6,10 +6,11 @@ import styles from "./styles.module.css";
 const { headerContainer, headerLogo } = styles;
 
 function Header() {
+  const navigate = useNavigate();
   return (
     <header>
       <div className={headerContainer}>
-        <h1 className={headerLogo}>
+        <h1 className={headerLogo} onClick={() => navigate("/")}>
           <span>our</span> <Badge bg="info">Ecom</Badge>
         </h1>
 

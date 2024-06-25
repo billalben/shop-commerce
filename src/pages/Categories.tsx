@@ -7,7 +7,7 @@ import GridList from "@components/common/GridList/GridList";
 import { TCategory } from "@customTypes/category";
 import { Heading } from "@components/common";
 
-function Categories() {
+const Categories = () => {
   const dispatch = useAppDispatch();
   const { loading, error, records } = useAppSelector(
     (state) => state.categories
@@ -22,7 +22,7 @@ function Categories() {
   return (
     <>
       <Heading>Categories</Heading>
-      <Loading loading={loading} error={error}>
+      <Loading status={loading} error={error}>
         <GridList<TCategory>
           records={records}
           renderItem={(record) => <Category {...record} />}
@@ -30,6 +30,6 @@ function Categories() {
       </Loading>
     </>
   );
-}
+};
 
 export default Categories;

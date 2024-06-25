@@ -11,7 +11,7 @@ import { Loading } from "@components/feedback";
 import { TProduct } from "@customTypes/product";
 
 const Products = () => {
-  const { prefix } = useParams();
+  const { prefix } = useParams<{ prefix: string }>();
   const dispatch = useAppDispatch();
   const { loading, error, records } = useAppSelector((state) => state.products);
   const cartItems = useAppSelector((state) => state.cart.items);
@@ -26,7 +26,9 @@ const Products = () => {
   );
 
   useEffect(() => {
-    dispatch(actGetProductsByCatPrefix(prefix as string));
+    if (prefix) {
+      dispatch(actGetProductsByCatPrefix(prefix));
+    }
 
     return () => {
       dispatch(productsCleanUp());
@@ -36,7 +38,7 @@ const Products = () => {
   return (
     <>
       <Heading className="text-capitalize">{prefix} Products</Heading>
-      <Loading loading={loading} error={error}>
+      <Loading status={loading} error={error}>
         <GridList<TProduct>
           records={productsFullInfo}
           renderItem={(record) => <Product {...record} />}

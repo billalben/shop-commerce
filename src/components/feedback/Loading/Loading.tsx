@@ -1,18 +1,23 @@
+import React from "react";
 import { TLoading } from "@customTypes/shared";
 
 type LoadingProps = {
-  loading: TLoading;
-  error: null | string;
+  status: TLoading;
+  error?: string | null;
   children: React.ReactNode;
-  // children: React.JSX.Element;
 };
 
-const Loading = ({ loading, error, children }: LoadingProps) => {
-  if (loading === "pending") return <div>loading please wait ⭐️</div>;
+const Loading = ({ status, error = null, children }: LoadingProps) => {
+  if (status === "pending")
+    return <div className="loading-message">Loading, please wait... ⭐️</div>;
 
-  if (loading === "failed") return <div>{error}</div>;
+  if (status === "failed" && error)
+    return <div className="error-message">{error}</div>;
 
-  return <>{children}</>;
+  if (status === "failed" && !error)
+    return <div className="error-message">An unexpected error occurred.</div>;
+
+  return <div>{children}</div>;
 };
 
 export default Loading;
