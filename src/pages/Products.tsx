@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import {
@@ -15,15 +15,13 @@ const Products = () => {
   const dispatch = useAppDispatch();
   const { loading, error, records } = useAppSelector((state) => state.products);
   const cartItems = useAppSelector((state) => state.cart.items);
+  const wishListItemsId = useAppSelector((state) => state.wishlist.itemsId);
 
-  const productsFullInfo = useMemo(
-    () =>
-      records.map((el) => ({
-        ...el,
-        quantity: cartItems[el.id] || 0,
-      })),
-    [records, cartItems]
-  );
+  const productsFullInfo = records.map((el) => ({
+    ...el,
+    quantity: cartItems[el.id],
+    isLiked: wishListItemsId.includes(el.id),
+  }));
 
   useEffect(() => {
     if (prefix) {

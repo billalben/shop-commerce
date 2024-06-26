@@ -1,4 +1,4 @@
-import { actGetProductsByItems, cartItemChangeQuantity, cartItemRemove } from "@store/cart/cartSlice";
+import { actGetProductsByItems, cartItemChangeQuantity, cartItemRemove, clearProductFullInfo } from "@store/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { useCallback, useEffect } from "react";
 
@@ -11,6 +11,10 @@ const useCart = () => {
 
   useEffect(() => {
     dispatch(actGetProductsByItems());
+
+    return () => {
+      dispatch(clearProductFullInfo());
+    };
   }, [dispatch]);
 
   const products = productsFullInfo.map((product) => ({

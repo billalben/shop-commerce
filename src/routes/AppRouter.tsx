@@ -12,6 +12,7 @@ import Login from "@pages/Login";
 import Register from "@pages/Register";
 import Error from "@pages/Error";
 import Cart from "@pages/Cart";
+import Wishlist from "@pages/Wishlist";
 
 const router = createBrowserRouter([
   {
@@ -19,18 +20,10 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     errorElement: <Error />,
     children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "cart",
-        element: <Cart />,
-      },
-      {
-        path: "categories",
-        element: <Categories />,
-      },
+      { index: true, element: <Home /> },
+      { path: "cart", element: <Cart /> },
+      { path: "wishlist", element: <Wishlist /> },
+      { path: "categories", element: <Categories /> },
       {
         path: "categories/products/:prefix",
         element: <Products />,
@@ -47,18 +40,9 @@ const router = createBrowserRouter([
           return true;
         },
       },
-      {
-        path: "about-us",
-        element: <AboutUs />,
-      },
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "register",
-        element: <Register />,
-      },
+      { path: "about-us", element: <AboutUs /> },
+      { path: "login", element: <Login /> },
+      { path: "register", element: <Register /> },
     ],
   },
 ]);
