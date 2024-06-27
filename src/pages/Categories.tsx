@@ -1,27 +1,16 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { actGetCategories } from "@store/categories/categoriesSlice";
 import { Category } from "@components/eCommerce";
 import { Loading } from "@components/feedback";
 import GridList from "@components/common/GridList/GridList";
-import { TCategory } from "@customTypes/category";
+import { TCategory } from "@types";
 import { Heading } from "@components/common";
+import useCategories from "@hooks/useCategories";
 
 const Categories = () => {
-  const dispatch = useAppDispatch();
-  const { loading, error, records } = useAppSelector(
-    (state) => state.categories
-  );
-
-  useEffect(() => {
-    if (!records.length) {
-      dispatch(actGetCategories());
-    }
-  }, [dispatch, records]);
+  const { loading, error, records } = useCategories();
 
   return (
     <>
-      <Heading>Categories</Heading>
+      <Heading title="Categories" />
       <Loading status={loading} error={error}>
         <GridList<TCategory>
           records={records}

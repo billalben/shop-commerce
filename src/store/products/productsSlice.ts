@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import actGetProductsByCatPrefix from "./act/actGetProductsByCatPrefix";
-import { TLoading } from "@customTypes/shared";
-import { TProduct } from "@customTypes/product";
+import { TLoading } from "@types";
+import { TProduct } from "@types";
 
 interface ICategoriesState {
   records: TProduct[];
@@ -19,7 +19,7 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    productsCleanUp: (state) => {
+    cleanUpProductsRecords: (state) => {
       state.records = [];
     },
   },
@@ -44,6 +44,6 @@ const productsSlice = createSlice({
   },
 });
 
-export const { productsCleanUp } = productsSlice.actions;
+export const { cleanUpProductsRecords } = productsSlice.actions;
 export { actGetProductsByCatPrefix };
 export default productsSlice.reducer;

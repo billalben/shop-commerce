@@ -1,25 +1,24 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import { HeaderBasket, HeaderWishlist } from "../../eCommerce";
-import { Badge, Navbar, Nav, Container } from "react-bootstrap";
-
+import { Link, NavLink } from "react-router-dom";
+import { Navbar, Nav, Container } from "react-bootstrap";
+import HeaderLeftBar from "./HeaderLeftBar/HeaderLeftBar";
 import styles from "./styles.module.css";
-const { headerContainer, headerLogo, headerLeftBar } = styles;
+import LogoIcon from "@assets/svg/logo.svg?react";
+const { headerContainer, headerLogo } = styles;
 
 const Header = () => {
-  const navigate = useNavigate();
   return (
     <header>
-      <div className={headerContainer}>
-        <h1 className={headerLogo} onClick={() => navigate("/")}>
-          <span>our</span> <Badge bg="info">Ecom</Badge>
-        </h1>
-        <div className={headerLeftBar}>
-          <HeaderWishlist />
-          <HeaderBasket />
-        </div>
+      <div className={`${headerContainer} container`}>
+        <Link to="/" className={headerLogo}>
+          <LogoIcon title="logo" />
+          <h2>Shop</h2>
+        </Link>
+
+        <HeaderLeftBar />
       </div>
+
       <Navbar
-        expand="lg"
+        expand="sm"
         className="bg-body-tertiary"
         bg="dark"
         data-bs-theme="dark"

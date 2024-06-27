@@ -1,26 +1,26 @@
-import { actGetProductsByItems, cartItemChangeQuantity, cartItemRemove, clearProductFullInfo } from "@store/cart/cartSlice";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { useCallback, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import {
+  actGetProductsByItems,
+  cartItemChangeQuantity,
+  cartItemRemove,
+  cleanCartProductsFullInfo,
+} from "@store/cart/cartSlice";
 
-// Custom hook for managing cart logic
 const useCart = () => {
   const dispatch = useAppDispatch();
   const { items, productsFullInfo, loading, error } = useAppSelector(
-    ({ cart }) => cart
+    (state) => state.cart
   );
 
   useEffect(() => {
-    dispatch(actGetProductsByItems());
+    const promise = dispatch(actGetProductsByItems());
 
     return () => {
-      dispatch(clearProductFullInfo());
+      promise.abort();
+      dispatch(cleanCartProductsFullInfo());
     };
   }, [dispatch]);
-
-  const products = productsFullInfo.map((product) => ({
-    ...product,
-    quantity: items[product.id],
-  }));
 
   const changeQuantityHandler = useCallback(
     (id: number, quantity: number) => {
@@ -36,7 +36,12 @@ const useCart = () => {
     [dispatch]
   );
 
-  return { products, loading, error, changeQuantityHandler, removeItemHandler };
+  const products = productsFullInfo.map((el) => ({
+    ...el,
+    quantity: items[el.id],
+  }));
+
+  return { loading, error, products, changeQuantityHandler, removeItemHandler };
 };
 
 export default useCart;

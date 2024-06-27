@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import { Container } from "react-bootstrap";
 import { Header, Footer } from "@components/common";
 
 import styles from "./styles.module.css";
@@ -7,13 +6,13 @@ const { container, wrapper } = styles;
 
 function MainLayout() {
   return (
-    <Container className={container}>
+    <div className={container}>
       <Header />
-      <div className={wrapper}>
+      <div className={`${wrapper} container`}>
         <Outlet />
       </div>
       <Footer />
-    </Container>
+    </div>
   );
 }
 

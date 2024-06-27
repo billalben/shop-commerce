@@ -1,41 +1,15 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import {
-  actGetProductsByCatPrefix,
-  productsCleanUp,
-} from "@store/products/productsSlice";
 import { GridList, Heading } from "@components/common";
 import { Product } from "@components/eCommerce";
 import { Loading } from "@components/feedback";
-import { TProduct } from "@customTypes/product";
+import { TProduct } from "@types";
+import useProducts from "@hooks/useProducts";
 
 const Products = () => {
-  const { prefix } = useParams<{ prefix: string }>();
-  const dispatch = useAppDispatch();
-  const { loading, error, records } = useAppSelector((state) => state.products);
-  const cartItems = useAppSelector((state) => state.cart.items);
-  const wishListItemsId = useAppSelector((state) => state.wishlist.itemsId);
-
-  const productsFullInfo = records.map((el) => ({
-    ...el,
-    quantity: cartItems[el.id],
-    isLiked: wishListItemsId.includes(el.id),
-  }));
-
-  useEffect(() => {
-    if (prefix) {
-      dispatch(actGetProductsByCatPrefix(prefix));
-    }
-
-    return () => {
-      dispatch(productsCleanUp());
-    };
-  }, [dispatch, prefix]);
+  const { loading, error, productPrefix, productsFullInfo } = useProducts();
 
   return (
     <>
-      <Heading className="text-capitalize">{prefix} Products</Heading>
+      <Heading title={`${productPrefix} Products`} />
       <Loading status={loading} error={error}>
         <GridList<TProduct>
           records={productsFullInfo}

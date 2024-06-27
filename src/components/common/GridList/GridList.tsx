@@ -15,17 +15,17 @@ const GridList = <T extends { id?: number }>({
   const renderList =
     records.length > 0
       ? records.map((record) => (
-          <Col
-            xs={3}
-            key={record.id}
-            className="d-flex justify-content-center mb-5 mt-2"
-          >
+          <Col key={record.id} className="d-flex justify-content-center p-2">
             {renderItem(record)}
           </Col>
         ))
       : "there are no records ䷢";
 
-  return <Row>{renderList}</Row>;
+  return (
+    <Row xs={2} sm={3} md={4} lg={5} className="justify-content-center gap-2 my-5">
+      {renderList}
+    </Row>
+  );
 };
 
 export default GridList;

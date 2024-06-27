@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import actLikeToggle from "./act/actLikeToggle";
 import actGetWishlist from "./act/actGetWishlist";
-import { TLoading } from "@customTypes/shared";
-import { TProduct } from "@customTypes/product";
+import { TLoading } from "@types";
+import { TProduct } from "@types";
+import { isString } from "@types";
 
 interface IWishlist {
   itemsId: number[];
@@ -22,7 +23,7 @@ const wishlistSlice = createSlice({
   name: "wishlist",
   initialState,
   reducers: {
-    productsFullInfoCleanUp: (state) => {
+    cleanWishlistProductsFullInfo: (state) => {
       state.productsFullInfo = [];
     },
   },
@@ -41,9 +42,10 @@ const wishlistSlice = createSlice({
       }
     });
     builder.addCase(actLikeToggle.rejected, (state, action) => {
-      if (action.payload && typeof action.payload === "string") {
-        state.error = action.payload;
-      }
+      // if (action.payload && typeof action.payload === "string") {
+      //   state.error = action.payload;
+      // }
+      if (isString(action.payload)) state.error = action.payload;
     });
     // get wishlist items
     builder.addCase(actGetWishlist.pending, (state) => {
@@ -54,19 +56,21 @@ const wishlistSlice = createSlice({
       state.loading = "succeeded";
       state.productsFullInfo = action.payload;
 
-      if (state.itemsId.length === 0 && action.payload.length > 0) {
-        state.itemsId = action.payload.map((el) => el.id);
-      }
+      // if (state.itemsId.length === 0 && action.payload.length > 0) {
+      //   state.itemsId = action.payload.map((el) => el.id);
+      // }
     });
     builder.addCase(actGetWishlist.rejected, (state, action) => {
       state.loading = "failed";
-      if (action.payload && typeof action.payload === "string") {
-        state.error = action.payload;
-      }
+      // if (action.payload && typeof action.payload === "string") {
+      //   state.error = action.payload;
+      // }
+
+      if (isString(action.payload)) state.error = action.payload;
     });
   },
 });
 
 export { actLikeToggle, actGetWishlist };
-export const { productsFullInfoCleanUp } = wishlistSlice.actions;
+export const { cleanWishlistProductsFullInfo } = wishlistSlice.actions;
 export default wishlistSlice.reducer;

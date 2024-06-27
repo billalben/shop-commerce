@@ -1,16 +1,11 @@
-import React from "react";
+import { memo } from "react";
 
-type HeadingProps = {
-  className?: string;
-  children: React.ReactNode;
-};
-
-const Heading = ({ className, children }: HeadingProps) => {
+const Heading = memo(({ title }: { title: string }) => {
   return (
-    <h2 className={`mb-3 ${className ?? ""}`} style={{ fontSize: "26px" }}>
-      {children}
+    <h2 className="text-uppercase mb-3 fs-3">
+      {title}
     </h2>
   );
-};
+});
 
 export default Heading;

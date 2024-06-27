@@ -4,8 +4,8 @@ import {
   getCartTotalQuantitySelector,
   itemQuantityAvailabilityCheckingSelector,
 } from "./selectors";
-import { TProduct } from "@customTypes/product";
-import { TLoading } from "@customTypes/shared";
+import { TProduct } from "@types";
+import { TLoading } from "@types";
 
 interface ICartState {
   items: { [key: string]: number };
@@ -39,7 +39,7 @@ const cartSlice = createSlice({
         (el) => el.id !== action.payload
       );
     },
-    clearProductFullInfo: (state) => {
+    cleanCartProductsFullInfo: (state) => {
       state.productsFullInfo = [];
     },
   },
@@ -68,6 +68,6 @@ export {
   actGetProductsByItems,
 };
 
-export const { addToCart, cartItemChangeQuantity, cartItemRemove, clearProductFullInfo} =
+export const { addToCart, cartItemChangeQuantity, cartItemRemove, cleanCartProductsFullInfo} =
   cartSlice.actions;
 export default cartSlice.reducer;
