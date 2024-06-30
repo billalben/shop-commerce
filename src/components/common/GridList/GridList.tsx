@@ -1,9 +1,10 @@
+import { LottieHandler } from "@components/feedback";
 import { Row, Col } from "react-bootstrap";
 
 type GridListProps<T> = {
   records: T[];
   renderItem: (record: T) => React.ReactNode;
-  // renderItem: (record: T) => JSX.Element;
+  emptyMessage: string;
 };
 
 /* _____________ The Render Props pattern _____________ */
@@ -11,18 +12,27 @@ type GridListProps<T> = {
 const GridList = <T extends { id?: number }>({
   records,
   renderItem,
+  emptyMessage,
 }: GridListProps<T>) => {
   const renderList =
-    records.length > 0
-      ? records.map((record) => (
-          <Col key={record.id} className="d-flex justify-content-center p-2">
-            {renderItem(record)}
-          </Col>
-        ))
-      : "there are no records ䷢";
+    records.length > 0 ? (
+      records.map((record) => (
+        <Col key={record.id} className="d-flex justify-content-center p-2">
+          {renderItem(record)}
+        </Col>
+      ))
+    ) : (
+      <LottieHandler type="empty" message={emptyMessage} />
+    );
 
   return (
-    <Row xs={2} sm={3} md={4} lg={5} className="justify-content-center gap-2 my-5">
+    <Row
+      xs={2}
+      sm={3}
+      md={4}
+      lg={5}
+      className="justify-content-center gap-2"
+    >
       {renderList}
     </Row>
   );

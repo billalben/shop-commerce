@@ -10,10 +10,11 @@ const Wishlist = () => {
   return (
     <>
       <Heading title="Your Wishlist" />
-      <Loading status={loading} error={error}>
+      <Loading status={loading} error={error} type="product">
         <GridList<TProduct>
           records={records}
           renderItem={(record) => <Product {...record} />}
+          emptyMessage="Your wishlist is empty"
         />
       </Loading>
     </>

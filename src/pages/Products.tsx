@@ -10,10 +10,11 @@ const Products = () => {
   return (
     <>
       <Heading title={`${productPrefix} Products`} />
-      <Loading status={loading} error={error}>
+      <Loading status={loading} error={error} type="product">
         <GridList<TProduct>
           records={productsFullInfo}
           renderItem={(record) => <Product {...record} />}
+          emptyMessage="There are no products"
         />
       </Loading>
     </>
