@@ -1,68 +1,26 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signUpSchema, signUpType } from "@validations/signUpSchema";
-import useCheckEmailAvailability from "@hooks/useCheckEmailAvailability";
 import { Heading } from "@components/common";
 import { Input } from "@components/Form";
-import { Form, Button, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Form, Button, Col, Spinner } from "react-bootstrap";
+import { Link, Navigate } from "react-router-dom";
+import useRegister from "@hooks/useRegister";
 
 const Register = () => {
   const {
+    loading,
+    error,
+    accessToken,
+    formErrors,
     emailAvailabilityStatus,
-    enteredEmail,
-    checkEmailAvailability,
-    resetCheckEmailAvailability,
-  } = useCheckEmailAvailability();
-
-  const {
+    submitForm,
     register,
     handleSubmit,
-    getFieldState,
-    trigger,
-    formState: { errors, touchedFields },
-  } = useForm<signUpType>({
-    mode: "onBlur",
-    resolver: zodResolver(signUpSchema),
-  });
+    emailOnBlurHandler,
+    getEmailErrorMessage,
+    getEmailFormText,
+    touchedFields,
+  } = useRegister();
 
-  const submitForm: SubmitHandler<signUpType> = (data) => {
-    console.log(data);
-  };
-
-  const emailOnBlurHandler = async (e: React.FocusEvent<HTMLInputElement>) => {
-    await trigger("email");
-    const value = e.target.value;
-    const { isDirty, invalid } = getFieldState("email");
-
-    if (isDirty && !invalid && enteredEmail !== value) {
-      // checking
-      checkEmailAvailability(value);
-    }
-
-    if (isDirty && invalid && enteredEmail) {
-      resetCheckEmailAvailability();
-    }
-  };
-
-  const getEmailErrorMessage = () => {
-    if (errors.email?.message) return errors.email.message;
-
-    switch (emailAvailabilityStatus) {
-      case "notAvailable":
-        return "This email is already in use.";
-      case "failed":
-        return "Error from the server.";
-      default:
-        return "";
-    }
-  };
-
-  function getEmailFormText() {
-    return emailAvailabilityStatus === "checking"
-      ? "We're currently checking the availability of this email address. Please wait a moment."
-      : "";
-  }
+  if (accessToken) return <Navigate to="/" />;
 
   return (
     <>
@@ -77,10 +35,10 @@ const Register = () => {
             label="First Name"
             name="firstName"
             register={register}
-            error={errors.firstName?.message}
+            error={formErrors.firstName?.message}
             placeholder="Enter your first name"
             touched={touchedFields.firstName}
-            success={errors.firstName?.message ? "" : "Looks good!"}
+            success={formErrors.firstName?.message ? "" : "Looks good!"}
           />
         </Col>
         <Col md={{ span: 6 }}>
@@ -88,10 +46,10 @@ const Register = () => {
             label="Last Name"
             name="lastName"
             register={register}
-            error={errors.lastName?.message}
+            error={formErrors.lastName?.message}
             placeholder="Enter your last name"
             touched={touchedFields.lastName}
-            success={errors.lastName?.message ? "" : "Looks good!"}
+            success={formErrors.lastName?.message ? "" : "Looks good!"}
           />
         </Col>
         <Col md={{ span: 6 }}>
@@ -118,10 +76,10 @@ const Register = () => {
             label="Password"
             name="password"
             register={register}
-            error={errors.password?.message}
+            error={formErrors.password?.message}
             placeholder="Enter your password"
             touched={touchedFields.password}
-            success={errors.password?.message ? "" : "Looks good!"}
+            success={formErrors.password?.message ? "" : "Looks good!"}
           />
         </Col>
         <Col md={{ span: 6 }}>
@@ -130,10 +88,10 @@ const Register = () => {
             label="Confirm Password"
             name="confirmPassword"
             register={register}
-            error={errors.confirmPassword?.message}
+            error={formErrors.confirmPassword?.message}
             placeholder="Confirm your password"
             touched={touchedFields.confirmPassword}
-            success={errors.confirmPassword?.message ? "" : "Looks good!"}
+            success={formErrors.confirmPassword?.message ? "" : "Looks good!"}
           />
         </Col>
         <Col sm={{ span: 12 }}>
@@ -141,15 +99,26 @@ const Register = () => {
             className="mx-auto"
             variant="primary"
             type="submit"
-            disabled={emailAvailabilityStatus === "checking" ? true : false}
+            disabled={
+              emailAvailabilityStatus === "checking" || loading === "pending"
+            }
           >
-            Submit
+            {loading === "pending" ? (
+              <>
+                <Spinner animation="border" size="sm"></Spinner> Loading...
+              </>
+            ) : (
+              "Submit"
+            )}
           </Button>
         </Col>
         <Col md={{ span: 12 }} className="text-end">
           {/* if you have an account, Login  */}
           <Link to="/login">Already have an account? Login</Link>
         </Col>
+        {error && (
+          <p style={{ color: "#DC3545", marginTop: "10px" }}>{error}</p>
+        )}
       </Form>
     </>
   );
