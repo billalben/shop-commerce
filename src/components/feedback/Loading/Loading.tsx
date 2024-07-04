@@ -4,11 +4,13 @@ import CartSkeleton from "../skeletons/CartSkeleton/CartSkeleton";
 import LottieHandler from "../LottieHandler/LottieHandler";
 
 import { TLoading } from "@types";
+import TableSkeleton from "../TableSkeleton/TableSkeleton";
 
 const skeletonsTypes = {
   category: CategorySkeleton,
   product: ProductSkeleton,
   cart: CartSkeleton,
+  table: TableSkeleton,
 };
 
 type LoadingProps = {

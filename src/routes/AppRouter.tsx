@@ -3,6 +3,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // layouts
 const MainLayout = lazy(() => import("@layouts/MainLayout/MainLayout"));
+const ProfileLayout = lazy(
+  () => import("@layouts/ProfileLayout/ProfileLayout")
+);
 
 // components
 import { PageSuspenseFallback } from "@components/feedback";
@@ -16,7 +19,8 @@ const Products = lazy(() => import("@pages/Products"));
 const AboutUs = lazy(() => import("@pages/AboutUs"));
 const Login = lazy(() => import("@pages/Login"));
 const Register = lazy(() => import("@pages/Register"));
-const Profile = lazy(() =>import("@pages/Profile"));
+const Account = lazy(() => import("@pages/Account"));
+const Orders = lazy(() => import("@pages/Orders"));
 import Error from "@pages/Error";
 
 // Protected Route
@@ -115,11 +119,29 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <PageSuspenseFallback>
-              <Profile />
+              <ProfileLayout />
             </PageSuspenseFallback>
           </ProtectedRoute>
         ),
-      }
+        children: [
+          {
+            index: true,
+            element: (
+              <PageSuspenseFallback>
+                <Account />
+              </PageSuspenseFallback>
+            ),
+          },
+          {
+            path: "orders",
+            element: (
+              <PageSuspenseFallback>
+                <Orders />
+              </PageSuspenseFallback>
+            ),
+          },
+        ],
+      },
     ],
   },
 ]);
