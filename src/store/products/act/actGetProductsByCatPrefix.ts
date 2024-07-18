@@ -5,16 +5,13 @@ import { TProduct } from "@types";
 
 type TResponse = TProduct[];
 
-const actGetProductsByCatPrefix = createAsyncThunk(
+const actGetProductsByCatPrefix = createAsyncThunk<TProduct[], string>(
   "products/actGetProductsByCatPrefix",
-  async (prefix: string, thunkAPI) => {
-    const { rejectWithValue, signal } = thunkAPI;
+  async (prefix, { rejectWithValue, signal }) => {
     try {
       const response = await axios.get<TResponse>(
         `/products?cat_prefix=${prefix}`,
-        {
-          signal,
-        }
+        { signal }
       );
       return response.data;
     } catch (error) {

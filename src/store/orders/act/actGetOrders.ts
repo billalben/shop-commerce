@@ -6,18 +6,16 @@ import { TOrderItem } from "@types";
 
 type TResponse = TOrderItem[];
 
-const actGetOrders = createAsyncThunk(
+const actGetOrders = createAsyncThunk<TOrderItem[], void, { state: RootState }>(
   "orders/actGetOrders",
-  async (_, thunkAPI) => {
-    const { rejectWithValue, getState, signal } = thunkAPI;
-    const { auth } = getState() as RootState;
+  async (_, { rejectWithValue, getState, signal }) => {
+    const { auth } = getState();
 
     try {
       const res = await axios.get<TResponse>(
         `/orders?userId=${auth.user?.id}`,
         { signal }
       );
-
       return res.data;
     } catch (error) {
       return rejectWithValue(axiosErrorHandler(error));

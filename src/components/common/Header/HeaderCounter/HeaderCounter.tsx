@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./styles.module.css";
+import { Stack } from "react-bootstrap";
 
 type HeaderCounterProps = {
   totalQuantity: number;
@@ -10,7 +11,7 @@ type HeaderCounterProps = {
   to: string;
 };
 
-const { container, totalNum, pumpAnimate, iconWrapper } = styles;
+const { totalNum, pumpAnimate } = styles;
 
 const HeaderCounter = ({
   totalQuantity,
@@ -23,8 +24,6 @@ const HeaderCounter = ({
   const quantityStyle = `${totalNum} ${isAnimate ? pumpAnimate : ""}`;
 
   useEffect(() => {
-    // dispatch(actGetWishlist());
-
     if (!totalQuantity) return;
 
     setIsAnimate(true);
@@ -37,15 +36,15 @@ const HeaderCounter = ({
   }, [totalQuantity]);
 
   return (
-    <div className={container} onClick={() => navigate(to)}>
-      <div className={iconWrapper}>
+    <Stack direction="horizontal" role="button" gap={1} className={`border-end pe-2`} onClick={() => navigate(to)}>
+      <div className='position-relative'>
         {svgIcon}
         {totalQuantity > 0 && (
           <div className={quantityStyle}>{totalQuantity}</div>
         )}
       </div>
-      <h3>{title}</h3>
-    </div>
+      <h3 className="fs-6 fw-light mb-0">{title}</h3>
+    </Stack>
   );
 };
 

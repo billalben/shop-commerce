@@ -3,9 +3,8 @@ import { getCartTotalQuantitySelector } from "@store/cart/cartSlice";
 import HeaderCounter from "../HeaderCounter/HeaderCounter";
 import WishlistIcon from "@assets/svg/wishlist.svg?react";
 import CartIcon from "@assets/svg/cart.svg?react";
-import styles from "./styles.module.css";
+import { Stack } from "react-bootstrap";
 
-const { headerLeftBar } = styles;
 
 const HeaderLeftBar = () => {
   const wishlistTotalQuantity = useAppSelector(
@@ -14,7 +13,7 @@ const HeaderLeftBar = () => {
   const cartTotalQuantity = useAppSelector(getCartTotalQuantitySelector);
 
   return (
-    <div className={headerLeftBar}>
+    <Stack direction="horizontal" gap={1}>
       <HeaderCounter
         to="wishlist"
         title="Wishlist"
@@ -27,7 +26,7 @@ const HeaderLeftBar = () => {
         totalQuantity={cartTotalQuantity}
         svgIcon={<CartIcon title="cart" />}
       />
-    </div>
+    </Stack>
   );
 };
 

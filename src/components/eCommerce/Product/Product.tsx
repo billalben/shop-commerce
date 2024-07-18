@@ -9,7 +9,7 @@ import { TProduct } from "@types";
 
 import styles from "./styles.module.css";
 import ProductInfo from "../ProductInfo/ProductInfo";
-const { maximumNotice, wishlistBtn } = styles;
+const { wishlistBtn } = styles;
 
 const Product = memo(
   ({
@@ -31,9 +31,7 @@ const Product = memo(
     const quantityReachedToMax = currentRemainingQuantity <= 0 ? true : false;
 
     useEffect(() => {
-      if (!isBtnDisabled) {
-        return;
-      }
+      if (!isBtnDisabled) return;
 
       const debounce = setTimeout(() => {
         setIsBtnDisabled(false);
@@ -83,7 +81,7 @@ const Product = memo(
             )}
           </div>
 
-          <p className={maximumNotice}>
+          <p className="fs-6 mb-3 text-secondary">
             {quantityReachedToMax
               ? "You reached to the limit"
               : `You can add ${currentRemainingQuantity} item(s)`}

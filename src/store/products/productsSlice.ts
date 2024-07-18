@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import actGetProductsByCatPrefix from "./act/actGetProductsByCatPrefix";
-import { TLoading } from "@types";
+import { isString, TLoading } from "@types";
 import { TProduct } from "@types";
 
 interface ICategoriesState {
@@ -25,22 +25,26 @@ const productsSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(actGetProductsByCatPrefix.pending, (state) => {
-      state.loading = "pending";
-      state.error = null;
-    });
+    builder
+      .addCase(actGetProductsByCatPrefix.pending, (state) => {
+        state.loading = "pending";
+        state.error = null;
+      })
+      .addCase(
+        actGetProductsByCatPrefix.fulfilled,
+        (state, action: PayloadAction<TProduct[]>) => {
+          state.loading = "succeeded";
+          state.records = action.payload;
+        }
+      )
+      .addCase(
+        actGetProductsByCatPrefix.rejected,
+        (state, action: PayloadAction<string | unknown>) => {
+          state.loading = "failed";
 
-    builder.addCase(actGetProductsByCatPrefix.fulfilled, (state, action) => {
-      state.loading = "succeeded";
-      state.records = action.payload;
-    });
-
-    builder.addCase(actGetProductsByCatPrefix.rejected, (state, action) => {
-      state.loading = "failed";
-      if (action.payload && typeof action.payload === "string") {
-        state.error = action.payload;
-      }
-    });
+          if (isString(action.payload)) state.error = action.payload;
+        }
+      );
   },
 });
 

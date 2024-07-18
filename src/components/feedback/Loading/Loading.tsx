@@ -38,7 +38,7 @@ const Loading = ({
     );
   }
 
-  return <div>{children}</div>;
+  return <>{children}</>;
 };
 
 export default Loading;

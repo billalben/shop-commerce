@@ -5,16 +5,15 @@ import { RootState } from "@store/index";
 
 const actPlaceOrder = createAsyncThunk(
   "orders/actPlaceOrder",
-  async (subtotal: number, thunkAPI) => {
-    const { rejectWithValue, getState } = thunkAPI;
+  async (subtotal: number, { rejectWithValue, getState }) => {
     const { cart, auth } = getState() as RootState;
 
-    const orderItems = cart.productsFullInfo.map((el) => ({
-      id: el.id,
-      title: el.title,
-      price: el.price,
-      img: el.img,
-      quantity: cart.items[el.id],
+    const orderItems = cart.productsFullInfo.map((product) => ({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      img: product.img,
+      quantity: cart.items[product.id],
     }));
 
     try {
@@ -23,7 +22,6 @@ const actPlaceOrder = createAsyncThunk(
         items: orderItems,
         subtotal,
       });
-
       return res.data;
     } catch (error) {
       return rejectWithValue(axiosErrorHandler(error));

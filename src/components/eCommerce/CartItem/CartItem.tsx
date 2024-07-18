@@ -1,11 +1,7 @@
 import { memo } from "react";
 import { Form, Button } from "react-bootstrap";
 import { TProduct } from "@types";
-import styles from "./styles.module.css";
 import ProductInfo from "../ProductInfo/ProductInfo";
-
-// const { cartItem, cartItemSelection } = styles;
-const { cartItem } = styles;
 
 type CartItemProps = TProduct & {
   changeQuantityHandler: (id: number, quantity: number) => void;
@@ -35,7 +31,7 @@ const CartItem = memo(
     };
 
     return (
-      <div className={cartItem}>
+      <div className="d-flex justify-content-between align-items-center pb-4 mb-4 border-bottom">
         <ProductInfo title={title} price={price} img={img} direction="row">
           <Button
             variant="secondary"

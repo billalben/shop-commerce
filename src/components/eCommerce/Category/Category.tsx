@@ -1,18 +1,18 @@
 import { TCategory } from "@types";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-const { category, categoryImg, categoryTitle } = styles;
 
 function Category({ title, img, prefix }: TCategory) {
   return (
-    <div className={category}>
-      <Link to={`/categories/products/${prefix}`}>
-        <div className={categoryImg}>
-          <img src={img} alt={title} />
-        </div>
-        <h4 className={categoryTitle}>{title}</h4>
-      </Link>
-    </div>
+    <Link
+      to={`/categories/products/${prefix}`}
+      className="text-center link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+    >
+      <div className="">
+        <img src={img} className={styles.categoryImg} alt={title} />
+      </div>
+      <h4 className="fs-5 mt-3">{title}</h4>
+    </Link>
   );
 }
 

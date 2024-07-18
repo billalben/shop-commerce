@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { useEffect } from "react";
 import { actGetWishlist } from "@store/wishlist/wishlistSlice";
 import { authLogout } from "@store/auth/authSlice";
-const { headerContainer, headerLogo } = styles;
+const { headerLogo } = styles;
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -22,8 +22,8 @@ const Header = () => {
 
   return (
     <header>
-      <div className={`${headerContainer} container`}>
-        <Link to="/" className={headerLogo}>
+      <div className="d-flex justify-content-between align-items-center py-3 container">
+        <Link to="/" className={`d-flex align-items-center text-decoration-none gap-1 text-black ${headerLogo}`}>
           <LogoIcon title="logo" />
           <h2>Shop</h2>
         </Link>
@@ -69,7 +69,9 @@ const Header = () => {
                   <NavDropdown.Item as={NavLink} to="profile" end>
                     Profile
                   </NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="profile/orders">Orders</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="profile/orders">
+                    Orders
+                  </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item
                     as={NavLink}

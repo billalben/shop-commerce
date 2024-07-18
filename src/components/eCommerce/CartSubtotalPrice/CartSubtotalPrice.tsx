@@ -4,7 +4,6 @@ import { clearCartAfterPlaceOrder } from "@store/cart/cartSlice";
 import { useState } from "react";
 import { TProduct } from "@types";
 import { Button, Modal, Spinner } from "react-bootstrap";
-import styles from "./styles.module.css";
 
 type CartSubtotalPriceProps = {
   products: TProduct[];
@@ -15,15 +14,6 @@ const CartSubtotalPrice = ({
   products,
   userAccessToken,
 }: CartSubtotalPriceProps) => {
-  // const subtotal = products.reduce((accumulator, current) => {
-  //   const price = current.price;
-  //   const quantity = current.quantity;
-
-  //   return quantity && typeof quantity === "number"
-  //     ? accumulator + price * quantity
-  //     : accumulator;
-  // }, 0);
-
   const dispatch = useAppDispatch();
 
   const [loading, setLoading] = useState(false);
@@ -92,24 +82,20 @@ const CartSubtotalPrice = ({
         </Modal.Footer>
       </Modal>
 
-      <div className={styles.container}>
+      <div className="d-flex justify-content-between mb-5">
         <span>Subtotal:</span>
         <span>{subtotal.toFixed(2)} DZD</span>
       </div>
 
       {userAccessToken && (
-        <div className={styles.container}>
-          <span> </span>
-          <span>
-            <Button
-              variant="info"
-              style={{ color: "white" }}
-              onClick={modalHandler}
-            >
-              Place Order
-            </Button>
-          </span>
-        </div>
+        <Button
+          variant="info"
+          style={{ color: "white" }}
+          onClick={modalHandler}
+          className="d-block ms-auto fw-semibold"
+        >
+          Place Order
+        </Button>
       )}
     </>
   );
