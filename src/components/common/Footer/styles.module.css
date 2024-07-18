@@ -1,0 +1,45 @@
+.footer {
+  background-color: #191919;
+  padding-top: 60px;
+}
+
+.social li a {
+  background-color: #313131;
+  color: #b9b9b9;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.facebook:hover {
+  background-color: #1877f2;
+  color: white;
+}
+
+.twitter:hover {
+  background-color: #1da1f2;
+  color: white;
+}
+
+.linkedin:hover {
+  background-color: #0a66c2;
+  color: white;
+}
+
+.links, .social {
+  list-style: none;
+  padding: 0;
+}
+
+.links li {
+  padding-block: 10px;
+}
+
+.links li:not(:last-child) {
+  padding-block: 10px;
+  border-bottom: 1px solid #444;
+}
