@@ -1,5 +1,5 @@
 export type TCategory = {
-  id?: number;
+  _id?: number;
   title: string;
   prefix: string;
   img: string;

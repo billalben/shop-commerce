@@ -12,7 +12,7 @@ const useRegister = () => {
 
   const navigate = useNavigate();
 
-  const { loading, error, accessToken } = useAppSelector((state) => state.auth);
+  const { loading, error, token } = useAppSelector((state) => state.auth);
 
   const {
     register,
@@ -85,7 +85,7 @@ const useRegister = () => {
   return {
     loading,
     error,
-    accessToken,
+    token,
     formErrors,
     emailAvailabilityStatus,
     submitForm,

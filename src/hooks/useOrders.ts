@@ -12,7 +12,7 @@ const useOrders = () => {
   const [selectedProduct, setSelectedProduct] = useState<TProduct[]>([]);
 
   const viewDetailsHandler = (id: number) => {
-    const productDetails = orderList.find((order) => order.id === id);
+    const productDetails = orderList.find((order) => order._id === id);
     const newItems = productDetails?.items ?? [];
 
     setShowModal(true);

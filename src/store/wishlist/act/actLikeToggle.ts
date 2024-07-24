@@ -11,14 +11,17 @@ const actLikeToggle = createAsyncThunk(
 
     try {
       const isRecordExist = await axios.get(
-        `/wishlist?userId=${auth.user?.id}&productId=${id}`
+        `/wishlist?userId=${auth.user?._id}&productId=${id}`
       );
 
-      if (isRecordExist.data.length > 0) {
-        await axios.delete(`/wishlist/${isRecordExist.data[0].id}`);
+      if (isRecordExist.data !== null) {
+        await axios.delete(`/wishlist/${isRecordExist.data._id}`);
         return { type: "remove", id };
       } else {
-        await axios.post("/wishlist", { userId: auth.user?.id, productId: id });
+        await axios.post("/wishlist", {
+          userId: auth.user?._id,
+          productId: id,
+        });
         return { type: "add", id };
       }
     } catch (error) {

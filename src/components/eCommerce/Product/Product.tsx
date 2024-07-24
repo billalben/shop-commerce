@@ -13,7 +13,7 @@ const { wishlistBtn } = styles;
 
 const Product = memo(
   ({
-    id,
+    _id,
     title,
     price,
     img,
@@ -41,7 +41,7 @@ const Product = memo(
     }, [isBtnDisabled]);
 
     const addToCartHandler = () => {
-      dispatch(addToCart(id));
+      dispatch(addToCart(_id));
       setIsBtnDisabled(true);
     };
 
@@ -49,7 +49,7 @@ const Product = memo(
       if (isAuthenticated) {
         if (!isLoading) {
           setIsLoading(true);
-          dispatch(actLikeToggle(id))
+          dispatch(actLikeToggle(_id))
             .unwrap()
             .then(() => setIsLoading(false))
             .catch(() => setIsLoading(false));

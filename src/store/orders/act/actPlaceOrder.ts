@@ -9,16 +9,16 @@ const actPlaceOrder = createAsyncThunk(
     const { cart, auth } = getState() as RootState;
 
     const orderItems = cart.productsFullInfo.map((product) => ({
-      id: product.id,
+      id: product._id,
       title: product.title,
       price: product.price,
       img: product.img,
-      quantity: cart.items[product.id],
+      quantity: cart.items[product._id],
     }));
 
     try {
       const res = await axios.post("/orders", {
-        userId: auth.user?.id,
+        userId: auth.user?._id,
         items: orderItems,
         subtotal,
       });

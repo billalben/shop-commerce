@@ -15,7 +15,7 @@ const useCart = () => {
     (state) => state.cart
   );
 
-  const userAccessToken = useAppSelector((state) => state.auth.accessToken);
+  const userAccessToken = useAppSelector((state) => state.auth.token);
 
   const placeOrderStatus = useAppSelector((state) => state.orders.loading);
 
@@ -35,7 +35,7 @@ const useCart = () => {
 
   const products = productsFullInfo.map((el) => ({
     ...el,
-    quantity: items[el.id],
+    quantity: items[el._id],
   }));
 
   useEffect(() => {

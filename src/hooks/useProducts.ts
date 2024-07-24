@@ -13,7 +13,7 @@ const useProducts = () => {
   const { loading, error, records } = useAppSelector((state) => state.products);
   const cartItems = useAppSelector((state) => state.cart.items);
   const wishListItemsId = useAppSelector((state) => state.wishlist.itemsId);
-  const userAccessToken = useAppSelector((state) => state.auth.accessToken);
+  const userAccessToken = useAppSelector((state) => state.auth.token);
 
   useEffect(() => {
     const promise = dispatch(
@@ -28,8 +28,8 @@ const useProducts = () => {
 
   const productsFullInfo = records.map((el) => ({
     ...el,
-    quantity: cartItems[el.id],
-    isLiked: wishListItemsId.includes(el.id),
+    quantity: cartItems[el._id],
+    isLiked: wishListItemsId.includes(el._id),
     isAuthenticated: !!userAccessToken,
   }));
 

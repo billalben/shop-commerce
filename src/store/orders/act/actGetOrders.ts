@@ -13,7 +13,7 @@ const actGetOrders = createAsyncThunk<TOrderItem[], void, { state: RootState }>(
 
     try {
       const res = await axios.get<TResponse>(
-        `/orders?userId=${auth.user?.id}`,
+        `/orders?userId=${auth.user?._id}`,
         { signal }
       );
       return res.data;

@@ -4,7 +4,6 @@ import { axiosErrorHandler } from "@utils";
 import { TProduct } from "@types";
 import { RootState } from "@store/index";
 
-
 const actGetWishlist = createAsyncThunk(
   "wishlist/actGetWishlist",
   async (dataType: "ProductsFullInfo" | "ProductIds", thunkAPI) => {
@@ -13,8 +12,13 @@ const actGetWishlist = createAsyncThunk(
 
     try {
       const userWishlist = await axios.get<{ productId: number }[]>(
-        `/wishlist?userId=${auth.user?.id}`,
-        { signal }
+        `/wishlist?userId=${auth.user?._id}`,
+        {
+          signal,
+          // headers: {
+          //   Authorization: `Bearer ${auth.token}`,
+          // },
+        }
       );
 
       if (!userWishlist.data.length) {
@@ -26,11 +30,11 @@ const actGetWishlist = createAsyncThunk(
         return { data: productIds, dataType: "ProductIds" };
       } else {
         const concatenatedItemsId = userWishlist.data
-          .map((el) => `id=${el.productId}`)
-          .join("&");
+          .map((el) => el.productId)
+          .join(",");
 
         const response = await axios.get<TProduct[]>(
-          `/products?${concatenatedItemsId}`
+          `/products?ids=${concatenatedItemsId}`
         );
         return { data: response.data, dataType: "ProductsFullInfo" };
       }

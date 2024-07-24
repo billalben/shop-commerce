@@ -10,7 +10,7 @@ type CartItemProps = TProduct & {
 
 const CartItem = memo(
   ({
-    id,
+    _id,
     title,
     img,
     price,
@@ -27,7 +27,7 @@ const CartItem = memo(
 
     const changeQuantity = (event: React.ChangeEvent<HTMLSelectElement>) => {
       const selectedQuantity = Number(event.target.value);
-      changeQuantityHandler(id, selectedQuantity);
+      changeQuantityHandler(_id, selectedQuantity);
     };
 
     return (
@@ -37,7 +37,7 @@ const CartItem = memo(
             variant="secondary"
             style={{ color: "white", width: "100px" }}
             className="mt-auto"
-            onClick={() => removeItemHandler(id)}
+            onClick={() => removeItemHandler(_id)}
           >
             Remove
           </Button>

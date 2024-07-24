@@ -9,12 +9,12 @@ type TFormData = {
 
 type TResponse = {
   user: {
-    id: number;
+    _id: number;
     email: string;
     firstName: string;
     lastName: string;
   };
-  accessToken: string;
+  token: string;
 };
 
 const actAuthLogin = createAsyncThunk(
@@ -23,7 +23,8 @@ const actAuthLogin = createAsyncThunk(
     const { rejectWithValue } = thunk;
 
     try {
-      const res = await axios.post<TResponse>("/login", formData);
+      const res = await axios.post<TResponse>("/auth/login", formData);
+
       return res.data;
     } catch (error) {
       return rejectWithValue(axiosErrorHandler(error));

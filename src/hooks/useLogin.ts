@@ -13,7 +13,7 @@ const useLogin = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const { error, loading, accessToken } = useAppSelector((state) => state.auth);
+  const { error, loading, token } = useAppSelector((state) => state.auth);
 
   const {
     register,
@@ -43,7 +43,7 @@ const useLogin = () => {
   return {
     error,
     loading,
-    accessToken,
+    token,
     formErrors,
     searchParams,
     register,

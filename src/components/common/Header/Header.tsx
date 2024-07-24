@@ -12,13 +12,13 @@ const { headerLogo } = styles;
 const Header = () => {
   const dispatch = useAppDispatch();
 
-  const { accessToken, user } = useAppSelector((state) => state.auth);
+  const { token, user } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    if (accessToken) {
+    if (token) {
       dispatch(actGetWishlist("ProductIds"));
     }
-  }, [dispatch, accessToken]);
+  }, [dispatch, token]);
 
   return (
     <header>
@@ -52,7 +52,7 @@ const Header = () => {
               </Nav.Link>
             </Nav>
             <Nav>
-              {!accessToken ? (
+              {!token ? (
                 <>
                   <Nav.Link as={NavLink} to="login">
                     Login

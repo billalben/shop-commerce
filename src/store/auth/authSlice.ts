@@ -5,19 +5,19 @@ import { TLoading, isString } from "@types";
 
 interface IAuthState {
   user: {
-    id: number;
+    _id: number;
     email: string;
     firstName: string;
     lastName: string;
   } | null;
-  accessToken: string | null;
+  token: string | null;
   loading: TLoading;
   error: string | null;
 }
 
 const initialState: IAuthState = {
   user: null,
-  accessToken: null,
+  token: null,
   loading: "idle",
   error: null,
 };
@@ -32,7 +32,7 @@ const authSlice = createSlice({
     },
     authLogout: (state) => {
       state.user = null;
-      state.accessToken = null;
+      state.token = null;
     },
   },
   extraReducers: (builder) => {
@@ -57,14 +57,12 @@ const authSlice = createSlice({
     });
     builder.addCase(actAuthLogin.fulfilled, (state, action) => {
       state.loading = "succeeded";
-      state.accessToken = action.payload.accessToken;
+      state.token = action.payload.token;
       state.user = action.payload.user;
     });
     builder.addCase(actAuthLogin.rejected, (state, action) => {
       state.loading = "failed";
-      if (isString(action.payload)) {
-        state.error = action.payload;
-      }
+      if (isString(action.payload)) state.error = action.payload;
     });
   },
 });

@@ -16,10 +16,10 @@ const actGetProductsByItems = createAsyncThunk(
     if (!itemsId.length) return fulfillWithValue([]);
 
     try {
-      const concatenatedItemsId = itemsId.map((el) => `id=${el}`).join("&");
+      const concatenatedItemsId = itemsId.map((el) => el).join(",");
 
       const response = await axios.get<TResponse>(
-        `/products?${concatenatedItemsId}`,
+        `/products?ids=${concatenatedItemsId}`,
         { signal }
       );
       return response.data;

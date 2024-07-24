@@ -8,7 +8,7 @@ const Login = () => {
   const {
     error,
     loading,
-    accessToken,
+    token,
     formErrors,
     searchParams,
     register,
@@ -16,7 +16,7 @@ const Login = () => {
     submitForm,
   } = useLogin();
 
-  if (accessToken) return <Navigate to="/" />;
+  if (token) return <Navigate to="/" />;
 
   return (
     <>

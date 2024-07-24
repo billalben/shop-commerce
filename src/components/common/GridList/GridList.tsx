@@ -9,7 +9,7 @@ type GridListProps<T> = {
 
 /* _____________ The Render Props pattern _____________ */
 
-const GridList = <T extends { id?: number }>({
+const GridList = <T extends { _id?: number }>({
   records,
   renderItem,
   emptyMessage,
@@ -17,7 +17,7 @@ const GridList = <T extends { id?: number }>({
   const renderList =
     records.length > 0 ? (
       records.map((record) => (
-        <Col key={record.id} className="d-flex justify-content-center p-2">
+        <Col key={record._id} className="d-flex justify-content-center p-2">
           {renderItem(record)}
         </Col>
       ))

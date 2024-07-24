@@ -24,7 +24,7 @@ const Orders = () => {
         <Modal.Body>
           {selectedProduct.map((el) => (
             <ProductInfo
-              key={el.id}
+              key={el._id}
               title={el.title}
               img={el.img}
               price={el.price}
@@ -48,13 +48,13 @@ const Orders = () => {
           </thead>
           <tbody>
             {orderList.map((el) => (
-              <tr key={el.id}>
-                <td>#{el.id}</td>
+              <tr key={el._id}>
+                <td>#{el._id}</td>
                 <td>
                   {el.items.length} item(s)
                   {" / "}
                   <span
-                    onClick={() => viewDetailsHandler(el.id)}
+                    onClick={() => viewDetailsHandler(el._id)}
                     role="button"
                     className="text-decoration-underline"
                   >

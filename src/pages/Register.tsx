@@ -8,7 +8,7 @@ const Register = () => {
   const {
     loading,
     error,
-    accessToken,
+    token,
     formErrors,
     emailAvailabilityStatus,
     submitForm,
@@ -20,7 +20,7 @@ const Register = () => {
     touchedFields,
   } = useRegister();
 
-  if (accessToken) return <Navigate to="/" />;
+  if (token) return <Navigate to="/" />;
 
   return (
     <>

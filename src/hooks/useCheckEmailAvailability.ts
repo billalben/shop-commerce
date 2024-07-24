@@ -14,11 +14,15 @@ const useCheckEmailAvailability = () => {
 
     try {
       const response = await axios.get(`/users?email=${email}`);
-      setEmailAvailabilityStatus(
-        response.data.length ? "notAvailable" : "available"
-      );
+
+      // Check if the response has the exists key
+      if (response.data.exists === true) {
+        setEmailAvailabilityStatus("notAvailable");
+      } else {
+        setEmailAvailabilityStatus("available");
+      }
     } catch (error) {
-      setEmailAvailabilityStatus("failed");
+      // setEmailAvailabilityStatus("failed");
     }
   };
 

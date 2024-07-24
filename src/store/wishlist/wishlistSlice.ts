@@ -40,7 +40,7 @@ const wishlistSlice = createSlice({
           } else {
             state.itemsId = state.itemsId.filter((el) => el !== id);
             state.productsFullInfo = state.productsFullInfo.filter(
-              (el) => el.id !== id
+              (el) => el._id !== id
             );
           }
         }
