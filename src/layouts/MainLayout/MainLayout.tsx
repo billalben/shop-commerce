@@ -1,15 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { Header, Footer } from "@components/common";
 
-const style = {
-  minHeight: "calc(100vh - 126px)",
-};
-
 function MainLayout() {
   return (
     <div>
       <Header />
-      <div style={style} className="container my-4">
+      <div className="container my-3" style={{ minHeight: "calc(100vh - 158px)" }}>
         <Outlet />
       </div>
       <Footer />

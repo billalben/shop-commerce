@@ -17,7 +17,7 @@ const GridList = <T extends { _id?: number }>({
   const renderList =
     records.length > 0 ? (
       records.map((record) => (
-        <Col key={record._id} className="d-flex justify-content-center p-2">
+        <Col key={record._id} xs={12} sm={6} md={4} lg={3}>
           {renderItem(record)}
         </Col>
       ))
@@ -25,11 +25,7 @@ const GridList = <T extends { _id?: number }>({
       <LottieHandler type="empty" message={emptyMessage} />
     );
 
-  return (
-    <Row className="justify-content-center gap-3" xs={2} sm={3} md={4} lg={5}>
-      {renderList}
-    </Row>
-  );
+  return <Row className="gy-4">{renderList}</Row>;
 };
 
 export default GridList;

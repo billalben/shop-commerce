@@ -87,7 +87,7 @@ const Product = memo(
               : `You can add ${currentRemainingQuantity} item(s)`}
           </p>
           <Button
-            variant="info"
+            variant="primary"
             style={{ color: "white" }}
             onClick={addToCartHandler}
             disabled={isBtnDisabled || quantityReachedToMax}
