@@ -23,7 +23,10 @@ const Header = () => {
   return (
     <header>
       <div className="d-flex justify-content-between align-items-center py-3 container">
-        <Link to="/" className={`d-flex align-items-center text-decoration-none gap-1 text-black ${headerLogo}`}>
+        <Link
+          to="/"
+          className={`d-flex align-items-center text-decoration-none gap-1 text-black ${headerLogo}`}
+        >
           <LogoIcon title="logo" />
           <h2>Shop</h2>
         </Link>
@@ -46,9 +49,6 @@ const Header = () => {
               </Nav.Link>
               <Nav.Link as={NavLink} to="categories">
                 Categories
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="about-us">
-                About
               </Nav.Link>
             </Nav>
             <Nav>

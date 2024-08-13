@@ -16,7 +16,6 @@ const Wishlist = lazy(() => import("@pages/Wishlist"));
 const Categories = lazy(() => import("@pages/Categories"));
 const Cart = lazy(() => import("@pages/Cart"));
 const Products = lazy(() => import("@pages/Products"));
-const AboutUs = lazy(() => import("@pages/AboutUs"));
 const Login = lazy(() => import("@pages/Login"));
 const Register = lazy(() => import("@pages/Register"));
 const Account = lazy(() => import("@pages/Account"));
@@ -89,14 +88,6 @@ const router = createBrowserRouter([
           }
           return true;
         },
-      },
-      {
-        path: "about-us",
-        element: (
-          <PageSuspenseFallback>
-            <AboutUs />
-          </PageSuspenseFallback>
-        ),
       },
       {
         path: "login",
