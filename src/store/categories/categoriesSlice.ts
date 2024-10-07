@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import actGetCategories from "./act/actGetCategories";
-import { isString, TLoading } from "@types";
-import { TCategory } from "@types";
+import { isString, TLoading, TCategory } from "@/types";
 
 interface ICategoriesState {
   records: TCategory[];

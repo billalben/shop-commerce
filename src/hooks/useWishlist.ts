@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   actGetWishlist,
   cleanWishlistProductsFullInfo,
-} from "@store/wishlist/wishlistSlice";
+} from "@/store/wishlist/wishlistSlice";
 
 const useWishlist = () => {
   const dispatch = useAppDispatch();

@@ -1,25 +1,7 @@
-.headerLogo h2 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
 .headerLogo svg path {
   transition: fill 0.3s;
 }
 
 .headerLogo:hover svg path {
   fill: #f00;
-}
-
-.headerLogo h1 {
-  margin: 0;
-  display: flex;
-}
-
-.headerLogo h1 span {
-  display: block;
-  margin-right: 5px;
 }

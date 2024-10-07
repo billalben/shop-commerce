@@ -1,15 +1,15 @@
-import { Link, NavLink } from "react-router-dom";
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
 import HeaderLeftBar from "./HeaderLeftBar/HeaderLeftBar";
-import styles from "./styles.module.css";
-import LogoIcon from "@assets/svg/logo.svg?react";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
+import LogoIcon from "@/assets/svg/logo.svg?react";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { authLogout } from "@/store/auth/authSlice";
 import { useEffect } from "react";
-import { actGetWishlist } from "@store/wishlist/wishlistSlice";
-import { authLogout } from "@store/auth/authSlice";
-const { headerLogo } = styles;
+import { actGetWishlist } from "@/store/wishlist/wishlistSlice";
+import { DropdownMenuDemo } from "@/components/DropdownMenu";
+// pathname
 
 const Header = () => {
+  const location = useLocation();
   const dispatch = useAppDispatch();
 
   const { token, user } = useAppSelector((state) => state.auth);
@@ -20,72 +20,74 @@ const Header = () => {
     }
   }, [dispatch, token]);
 
+  const handleLogout = () => {
+    dispatch(authLogout());
+  };
+
   return (
     <header>
-      <div className="d-flex justify-content-between align-items-center py-3 container">
+      <div className="container flex items-center justify-between py-3">
         <Link
           to="/"
-          className={`d-flex align-items-center text-decoration-none gap-1 text-black ${headerLogo}`}
+          className="flex items-center gap-1 text-black no-underline"
         >
           <LogoIcon title="logo" />
-          <h2>Shop</h2>
+          <h2 className="m-0 text-base font-bold capitalize tracking-widest">
+            Shop
+          </h2>
         </Link>
 
         <HeaderLeftBar />
       </div>
 
-      <Navbar
-        expand="sm"
-        className="bg-body-tertiary"
-        bg="dark"
-        data-bs-theme="dark"
-      >
-        <Container>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link as={NavLink} to="/">
-                Home
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="categories">
-                Categories
-              </Nav.Link>
-            </Nav>
-            <Nav>
-              {!token ? (
-                <>
-                  <Nav.Link as={NavLink} to="login">
-                    Login
-                  </Nav.Link>
-                  <Nav.Link as={NavLink} to="register">
-                    Register
-                  </Nav.Link>
-                </>
-              ) : (
-                <NavDropdown
-                  title={`Welcome: ${user?.firstName} ${user?.lastName}`}
-                  id="basic-nav-dropdown"
+      <nav className="bg-gray-900">
+        <ul className="container flex rounded-lg bg-gray-900 p-0 font-medium">
+          <li>
+            <Link
+              to="/"
+              className={`block px-4 py-2 text-white ${location.pathname === "/" ? "bg-blue-600" : ""}`}
+              aria-current="page"
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/categories"
+              className={`block px-4 py-2 text-white ${location.pathname === "/categories" ? "bg-blue-600" : ""}`}
+              aria-current="page"
+            >
+              Categories
+            </Link>
+          </li>
+          <li className="ml-auto flex">
+            {!token ? (
+              <>
+                <Link
+                  to="/login"
+                  className={`block px-4 py-2 text-white ${location.pathname === "/login" ? "bg-blue-600" : ""}`}
+                  aria-current="page"
                 >
-                  <NavDropdown.Item as={NavLink} to="profile" end>
-                    Profile
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={NavLink} to="profile/orders">
-                    Orders
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item
-                    as={NavLink}
-                    to="/"
-                    onClick={() => dispatch(authLogout())}
-                  >
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className={`block px-4 py-2 text-white ${location.pathname === "/register" ? "bg-blue-600" : ""}`}
+                  aria-current="page"
+                >
+                  Register
+                </Link>
+              </>
+            ) : (
+              <DropdownMenuDemo
+                handleLogout={handleLogout}
+                firstName={user?.firstName}
+                lastName={user?.lastName}
+              />
+            )}
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 };

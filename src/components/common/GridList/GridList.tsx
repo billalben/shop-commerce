@@ -1,5 +1,4 @@
-import { LottieHandler } from "@components/feedback";
-import { Row, Col } from "react-bootstrap";
+import { LottieHandler } from "@/components/feedback";
 
 type GridListProps<T> = {
   records: T[];
@@ -16,16 +15,16 @@ const GridList = <T extends { _id?: number }>({
 }: GridListProps<T>) => {
   const renderList =
     records.length > 0 ? (
-      records.map((record) => (
-        <Col key={record._id} xs={12} sm={6} md={4} lg={3}>
-          {renderItem(record)}
-        </Col>
-      ))
+      records.map((record) => <div key={record._id}>{renderItem(record)}</div>)
     ) : (
       <LottieHandler type="empty" message={emptyMessage} />
     );
 
-  return <Row className="gy-4">{renderList}</Row>;
+  return (
+    <div className="grid gap-4 gy-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {renderList}
+    </div>
+  );
 };
 
 export default GridList;

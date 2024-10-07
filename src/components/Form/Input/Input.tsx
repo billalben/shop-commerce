@@ -1,5 +1,4 @@
 import { Path, FieldValues, UseFormRegister } from "react-hook-form";
-import { Form } from "react-bootstrap";
 
 type InputProps<TFieldValue extends FieldValues> = {
   label: string;
@@ -28,29 +27,45 @@ const Input = <TFieldValue extends FieldValues>({
   placeholder,
   touched = false,
 }: InputProps<TFieldValue>) => {
-
   const onblurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     if (onBlur) onBlur(e);
 
     register(name).onBlur(e);
   };
 
+  console.log(touched);
+  
+
   return (
-    <Form.Group style={{ maxWidth: 512, width: "100%" }}>
-      <Form.Label>{label}</Form.Label>
-      <Form.Control
+    // <Form.Group style={{ maxWidth: 512, width: "100%" }}>
+    //   <Form.Label>{label}</Form.Label>
+    //   <Form.Control
+    //     type={type}
+    //     {...register(name)}
+    //     onBlur={onblurHandler}
+    //     isInvalid={!!error}
+    //     isValid={touched && !error}
+    //     disabled={disabled}
+    //     placeholder={placeholder}
+    //   />
+    //   <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
+    //   <Form.Control.Feedback type="valid">{success}</Form.Control.Feedback>
+    //   {formText && <Form.Text muted>{formText}</Form.Text>}
+    // </Form.Group>
+    <form className="max-w-lg w-full">
+      {/* <Form.Label>{label}</Form.Label> */}
+      <label htmlFor="">{label}</label>
+      <input
         type={type}
         {...register(name)}
         onBlur={onblurHandler}
-        isInvalid={!!error}
-        isValid={touched && !error}
         disabled={disabled}
         placeholder={placeholder}
       />
-      <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
-      <Form.Control.Feedback type="valid">{success}</Form.Control.Feedback>
-      {formText && <Form.Text muted>{formText}</Form.Text>}
-    </Form.Group>
+      <span>{error}</span>
+      <span>{success}</span>
+      {formText && <span className="text-muted">{formText}</span>}
+    </form>
   );
 };
 

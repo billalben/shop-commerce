@@ -1,23 +1,31 @@
-import { Heading } from "@components/common";
-import { Input } from "@components/Form";
-import { Form, Button, Col, Spinner } from "react-bootstrap";
+import { Heading } from "@/components/common";
 import { Link, Navigate } from "react-router-dom";
-import useRegister from "@hooks/useRegister";
+import useRegister from "@/hooks/useRegister";
+
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Spinner from "@/components/Spinner";
 
 const Register = () => {
   const {
     loading,
     error,
     token,
-    formErrors,
     emailAvailabilityStatus,
     submitForm,
-    register,
-    handleSubmit,
     emailOnBlurHandler,
     getEmailErrorMessage,
     getEmailFormText,
-    touchedFields,
+    form,
   } = useRegister();
 
   if (token) return <Navigate to="/" />;
@@ -25,100 +33,125 @@ const Register = () => {
   return (
     <>
       <Heading title="User Registration" />
-      <Form
-        onSubmit={handleSubmit(submitForm)}
-        className="row g-3 my-4 p-4 rounded"
-        style={{ backgroundColor: "#f4ecea" }}
-      >
-        <Col md={{ span: 6 }}>
-          <Input
-            label="First Name"
+
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(submitForm)} className="space-y-8">
+          <FormField
+            control={form.control}
             name="firstName"
-            register={register}
-            error={formErrors.firstName?.message}
-            placeholder="Enter your first name"
-            touched={touchedFields.firstName}
-            success={formErrors.firstName?.message ? "" : "Looks good!"}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>First Name</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Enter your first name" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </Col>
-        <Col md={{ span: 6 }}>
-          <Input
-            label="Last Name"
+          <FormField
+            control={form.control}
             name="lastName"
-            register={register}
-            error={formErrors.lastName?.message}
-            placeholder="Enter your last name"
-            touched={touchedFields.lastName}
-            success={formErrors.lastName?.message ? "" : "Looks good!"}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Last Name</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Enter your last name" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </Col>
-        <Col md={{ span: 6 }}>
-          <Input
-            label="Email Address"
+
+          <FormField
+            control={form.control}
             name="email"
-            register={register}
-            onBlur={emailOnBlurHandler}
-            error={getEmailErrorMessage()}
-            formText={getEmailFormText()}
-            success={
-              emailAvailabilityStatus === "available"
-                ? "This email is available for use."
-                : ""
-            }
-            disabled={emailAvailabilityStatus === "checking"}
-            placeholder="Enter your email address"
-            touched={touchedFields.email}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="Enter your email"
+                    onBlur={emailOnBlurHandler}
+                  />
+                </FormControl>
+                <FormDescription>{getEmailFormText()}</FormDescription>
+                <FormDescription>
+                  {emailAvailabilityStatus === "available" && (
+                    <span className="text-green-500">
+                      This Email is available
+                    </span>
+                  )}
+                </FormDescription>
+                <FormMessage>{getEmailErrorMessage()}</FormMessage>
+              </FormItem>
+            )}
           />
-        </Col>
-        <Col md={{ span: 6 }}>
-          <Input
-            type="password"
-            label="Password"
+
+          <FormField
+            control={form.control}
             name="password"
-            register={register}
-            error={formErrors.password?.message}
-            placeholder="Enter your password"
-            touched={touchedFields.password}
-            success={formErrors.password?.message ? "" : "Looks good!"}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    type="password"
+                    placeholder="Enter your password"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </Col>
-        <Col md={{ span: 6 }}>
-          <Input
-            type="password"
-            label="Confirm Password"
+
+          <FormField
+            control={form.control}
             name="confirmPassword"
-            register={register}
-            error={formErrors.confirmPassword?.message}
-            placeholder="Confirm your password"
-            touched={touchedFields.confirmPassword}
-            success={formErrors.confirmPassword?.message ? "" : "Looks good!"}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirm Password</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    {...field}
+                    placeholder="Enter your confirm password"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </Col>
-        <Col sm={{ span: 12 }}>
+
           <Button
-            className="mx-auto"
-            variant="primary"
+            className="flex gap-2 text-white"
             type="submit"
             disabled={
-              emailAvailabilityStatus === "checking" || loading === "pending"
+              emailAvailabilityStatus === "checking" ||
+              emailAvailabilityStatus === "notAvailable" ||
+              loading === "pending"
             }
           >
             {loading === "pending" ? (
               <>
-                <Spinner animation="border" size="sm"></Spinner> Loading...
+                <Spinner /> <span>Loading...</span>
               </>
             ) : (
               "Submit"
             )}
           </Button>
-        </Col>
-        <Col md={{ span: 12 }} className="text-end">
-          {/* if you have an account, Login  */}
-          <Link to="/login">Already have an account? Login</Link>
-        </Col>
-        {error && (
-          <p style={{ color: "#DC3545", marginTop: "10px" }}>{error}</p>
-        )}
+
+          {error && <p className="mt-3 text-[#DC3545]">{error}</p>}
+          <div className="text-end">
+            {/* if you have an account, Login  */}
+            Already have an account?
+            <Link to="/login" className="cursor-pointer hover:underline">
+              Login
+            </Link>
+          </div>
+        </form>
       </Form>
     </>
   );

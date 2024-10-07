@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   actGetCategories,
   cleanUpCategoriesRecords,
-} from "@store/categories/categoriesSlice";
+} from "@/store/categories/categoriesSlice";
 
 const useCategories = () => {
   const dispatch = useAppDispatch();

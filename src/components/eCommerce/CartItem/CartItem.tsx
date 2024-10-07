@@ -1,7 +1,17 @@
 import { memo } from "react";
-import { Form, Button } from "react-bootstrap";
-import { TProduct } from "@types";
+import { TProduct } from "@/types";
 import ProductInfo from "../ProductInfo/ProductInfo";
+import { Button } from "@/components/ui/button";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type CartItemProps = TProduct & {
   changeQuantityHandler: (id: number, quantity: number) => void;
@@ -19,24 +29,21 @@ const CartItem = memo(
     changeQuantityHandler,
     removeItemHandler,
   }: CartItemProps) => {
-    const renderOptions = Array.from({ length: max }, (_, idx) => (
-      <option value={idx + 1} key={idx + 1}>
-        {idx + 1}
-      </option>
+    const renderOptions = Array.from({ length: max }, (_, index) => (
+      <SelectItem value={String(index + 1)} key={index + 1}>
+        {index + 1}
+      </SelectItem>
     ));
 
-    const changeQuantity = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const selectedQuantity = Number(event.target.value);
-      changeQuantityHandler(_id, selectedQuantity);
+    const changeQuantity = (value: string) => {
+      changeQuantityHandler(_id, Number(value));
     };
 
     return (
-      <div className="d-flex justify-content-between align-items-center pb-4 mb-4 border-bottom">
+      <div className="flex items-center justify-between pb-4 mb-4 border-b">
         <ProductInfo title={title} price={price} img={img} direction="row">
           <Button
-            variant="secondary"
-            style={{ color: "white", width: "100px" }}
-            className="mt-auto"
+            className="mt-auto text-white w-28"
             onClick={() => removeItemHandler(_id)}
           >
             Remove
@@ -44,14 +51,23 @@ const CartItem = memo(
         </ProductInfo>
 
         <div>
-          <span className="d-block mb-1">Quantity</span>
-          <Form.Select value={quantity} onChange={changeQuantity}>
-            {renderOptions}
-          </Form.Select>
+          <span className="block mb-2">Quantity</span>
+
+          <Select onValueChange={changeQuantity}>
+            <SelectTrigger className="w-[56px]">
+              <SelectValue placeholder={quantity} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Quantity</SelectLabel>
+                {renderOptions}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default CartItem;

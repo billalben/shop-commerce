@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   actGetProductsByCatPrefix,
   cleanUpProductsRecords,
-} from "@store/products/productsSlice";
+} from "@/store/products/productsSlice";
 
 const useProducts = () => {
   const params = useParams();

@@ -1,34 +1,33 @@
 import Lottie from "lottie-react";
-import heroSection from "@assets/lottieFiles/heroSection.json";
-import { Badge, Button, Col, Row } from "react-bootstrap";
+import heroSection from "@/assets/lottieFiles/heroSection.json";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 function Home() {
   return (
     <>
-      <Row className="align-items-center justify-content-center">
-        <Col xs="12" md="6">
-          <span
-            style={{ fontSize: "14px" }}
-            className="fw-bolder text-muted text-uppercase"
-          >
-            #1 E-commerce Platform <Badge bg="secondary">2024</Badge>
+      <div className="grid items-center justify-center md:grid-cols-2">
+        <div>
+          <span className="text-sm font-bold text-gray-400 uppercase">
+            #1 E-commerce Platform{" "}
+            <Badge variant="default" className="ml-2">
+              2024
+            </Badge>
           </span>
-          <h1 className="display-1 text-primary mt-4">
+          <h1 className="mt-4 text-6xl text-blue-400">
             Explore, shop, repeat again.
           </h1>
-          <p className="fs-6 text-muted">
+          <p className="my-4 text-sm text-gray-500">
             Shop is a driving force behind the dreams of emerging entrepreneurs,
             a trusted partner for industry leaders.
           </p>
-          <Button variant="primary" className="mt-2">
-            Explore
-          </Button>
-        </Col>
+          <Button variant="default">Explore</Button>
+        </div>
 
-        <Col xs="12" md="6">
+        <div>
           <Lottie animationData={heroSection} />
-        </Col>
-      </Row>
+        </div>
+      </div>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import actPlaceOrder from "./act/actPlaceOrder";
 import actGetOrders from "./act/actGetOrders";
-import { TLoading, TOrderItem, isString } from "@types";
+import { TLoading, TOrderItem, isString } from "@/types";
 
 interface IOrderSlice {
   orderList: TOrderItem[];

@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { actAuthRegister, resetUI } from "@store/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { actAuthRegister, resetUI } from "@/store/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signUpSchema, signUpType } from "@validations/signUpSchema";
-import useCheckEmailAvailability from "@hooks/useCheckEmailAvailability";
+import { signUpSchema, signUpType } from "@/validations/signUpSchema";
+import useCheckEmailAvailability from "@/hooks/useCheckEmailAvailability";
 
 const useRegister = () => {
   const dispatch = useAppDispatch();
@@ -14,18 +14,14 @@ const useRegister = () => {
 
   const { loading, error, token } = useAppSelector((state) => state.auth);
 
-  const {
-    register,
-    handleSubmit,
-    getFieldState,
-    trigger,
-    formState: { errors: formErrors, touchedFields },
-  } = useForm<signUpType>({
+  const form = useForm<signUpType>({
     mode: "onBlur",
     resolver: zodResolver(signUpSchema),
   });
 
   const submitForm: SubmitHandler<signUpType> = async (data) => {
+    if (emailAvailabilityStatus === "notAvailable") return;
+
     const { firstName, lastName, email, password } = data;
     dispatch(actAuthRegister({ firstName, lastName, email, password }))
       .unwrap()
@@ -42,12 +38,11 @@ const useRegister = () => {
   } = useCheckEmailAvailability();
 
   const emailOnBlurHandler = async (e: React.FocusEvent<HTMLInputElement>) => {
-    await trigger("email");
+    await form.trigger("email");
     const value = e.target.value;
-    const { isDirty, invalid } = getFieldState("email");
+    const { isDirty, invalid } = form.getFieldState("email");
 
     if (isDirty && !invalid && enteredEmail !== value) {
-      // checking
       checkEmailAvailability(value);
     }
 
@@ -63,8 +58,14 @@ const useRegister = () => {
   }, [dispatch]);
 
   const getEmailErrorMessage = () => {
-    // if (errors.email?.message) return errors.email.message;
-    if (formErrors.email?.message) return formErrors.email.message;
+    // if (form.formState.errors.email?.message)
+    //   return form.formState.errors.email;
+
+    const fieldError = form.formState.errors.email?.message;
+
+    if (fieldError) {
+      return typeof fieldError === "string" ? fieldError : "";
+    }
 
     switch (emailAvailabilityStatus) {
       case "notAvailable":
@@ -86,15 +87,12 @@ const useRegister = () => {
     loading,
     error,
     token,
-    formErrors,
     emailAvailabilityStatus,
     submitForm,
-    register,
-    handleSubmit,
     emailOnBlurHandler,
     getEmailErrorMessage,
     getEmailFormText,
-    touchedFields,
+    form,
   };
 };
 

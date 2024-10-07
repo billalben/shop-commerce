@@ -1,9 +1,9 @@
 import Lottie from "lottie-react";
-import notFound from "@assets/lottieFiles/notFound.json";
-import empty from "@assets/lottieFiles/empty.json";
-import loading from "@assets/lottieFiles/loading.json";
-import error from "@assets/lottieFiles/error.json";
-import success from "@assets/lottieFiles/success.json";
+import notFound from "@/assets/lottieFiles/notFound.json";
+import empty from "@/assets/lottieFiles/empty.json";
+import loading from "@/assets/lottieFiles/loading.json";
+import error from "@/assets/lottieFiles/error.json";
+import success from "@/assets/lottieFiles/success.json";
 
 const lottieFilesMap = {
   notFound,
@@ -23,17 +23,9 @@ const LottieHandler = ({ type, message }: LottieHandlerProps) => {
   const lottie = lottieFilesMap[type];
 
   return (
-    <div className={`d-flex flex-column align-items-center w-100`}>
-      <Lottie
-        animationData={lottie}
-        className="w-100"
-        style={{ maxWidth: "412px" }}
-      />
-      {message && (
-        <h3 className="fs-6 mt-5" style={{ letterSpacing: 4 }}>
-          {message}
-        </h3>
-      )}
+    <div className={`flex flex-col items-center w-full`}>
+      <Lottie animationData={lottie} className="w-64 max-w-96" />
+      {message && <h3 className="mt-5 text-xl tracking-widest">{message}</h3>}
     </div>
   );
 };

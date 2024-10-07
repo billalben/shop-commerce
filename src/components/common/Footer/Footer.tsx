@@ -1,22 +1,20 @@
-import { Col, Row } from "react-bootstrap";
-import FacebookIcon from "@assets/svg/facebook.svg?react";
-import TwitterIcon from "@assets/svg/twitter.svg?react";
-import LinkedinIcon from "@assets/svg/linkedin.svg?react";
-import styles from "./styles.module.css";
+import FacebookIcon from "@/assets/svg/facebook.svg?react";
+import TwitterIcon from "@/assets/svg/twitter.svg?react";
+import LinkedinIcon from "@/assets/svg/linkedin.svg?react";
 
 function Footer() {
   const date = new Date().getFullYear();
   return (
-    <div className={`text-secondary ${styles.footer}`}>
-      <Row className="container mx-auto">
-        <Col xs={12} md={4}>
-          <h3 className="text-white fs-3 fw-bolder">Shop</h3>
-          <ul className={`d-flex gap-2 my-4 ${styles.social}`}>
+    <footer className="pt-10 bg-gray-900 text-[#b9b9b9]">
+      <div className="container grid justify-center gap-5 mb-10 sm:grid-cols-2 md:grid-cols-3">
+        <div>
+          <h3 className="text-2xl font-bold text-white">Shop</h3>
+          <ul className="flex gap-2 my-4">
             <li>
               <a
                 href="https://www.facebook.com/billal.benzazoua"
                 target="_blank"
-                className={styles.facebook}
+                className="flex h-12 w-12 items-center justify-center bg-[#313131] text-lg transition"
               >
                 <FacebookIcon />
               </a>
@@ -25,7 +23,7 @@ function Footer() {
               <a
                 href="https://www.linkedin.com/in/billal-benzazoua/"
                 target="_blank"
-                className={styles.twitter}
+                className="flex h-12 w-12 items-center justify-center bg-[#313131] text-lg transition"
               >
                 <TwitterIcon />
               </a>
@@ -34,97 +32,55 @@ function Footer() {
               <a
                 href="https://www.linkedin.com/in/billal-benzazoua/"
                 target="_blank"
-                className={styles.linkedin}
+                className="flex h-12 w-12 items-center justify-center bg-[#313131] text-lg transition"
               >
                 <LinkedinIcon />
               </a>
             </li>
           </ul>
-          <p>
+          <p className="text-gray-400">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
             aliquid porro nihil voluptas molestiae sed!
           </p>
-        </Col>
-        <Col xs={12} md={4}>
-          <ul className={styles.links}>
-            <li>
-              <a
-                href="#"
-                className="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-              >
-                About Us
-              </a>
+        </div>
+        <div>
+          <ul>
+            <li className="pb-3 border-b border-gray-500">
+              <a href="#">About Us</a>
             </li>
-            <li>
-              <a
-                href="#"
-                className="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-              >
-                Contact Us
-              </a>
+            <li className="pb-3 border-b border-gray-500">
+              <a href="#">Contact Us</a>
             </li>
-            <li>
-              <a
-                href="#"
-                className="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-              >
-                Careers
-              </a>
+            <li className="pb-3 border-b border-gray-500">
+              <a href="#">Careers</a>
             </li>
-            <li>
-              <a
-                href="#"
-                className="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-              >
-                Privacy Policy
-              </a>
+            <li className="pb-3">
+              <a href="#">Privacy Policy</a>
             </li>
           </ul>
-        </Col>
-        <Col xs={12} md={4}>
-          <ul className={styles.links}>
-            <li>
-              <a
-                href="#"
-                className="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-              >
-                Terms of Service
-              </a>
+        </div>
+        <div>
+          <ul>
+            <li className="pb-3 border-b border-gray-500">
+              <a href="#">Terms of Service</a>
             </li>
-            <li>
-              <a
-                href="#"
-                className="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-              >
-                Refund Policy
-              </a>
+            <li className="pb-3 border-b border-gray-500">
+              <a href="#">Refund Policy</a>
             </li>
-            <li>
-              <a
-                href="#"
-                className="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-              >
-                Shipping Policy
-              </a>
+            <li className="pb-3 border-b border-gray-500">
+              <a href="#">Shipping Policy</a>
             </li>
-            <li>
-              <a
-                href="#"
-                className="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-              >
-                FAQ
-              </a>
+            <li className="pb-3">
+              <a href="#">FAQ</a>
             </li>
           </ul>
-        </Col>
-      </Row>
-      <div
-        className={`text-center py-3 border-top border-secondary ${styles.footer}`}
-      >
+        </div>
+      </div>
+      <div className="py-3 text-center border-t border-gray-700">
         Made With &gt;3 By billal &copy; {date} Our E-commerce. All rights
         reserved.
       </div>
-    </div>
+    </footer>
   );
 }
 

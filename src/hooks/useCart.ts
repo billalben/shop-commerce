@@ -1,12 +1,12 @@
 import { useCallback, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   actGetProductsByItems,
   cartItemChangeQuantity,
   cartItemRemove,
   cleanCartProductsFullInfo,
-} from "@store/cart/cartSlice";
-import { resetOrderStatus } from "@store/orders/ordersSlice";
+} from "@/store/cart/cartSlice";
+import { resetOrderStatus } from "@/store/orders/ordersSlice";
 
 const useCart = () => {
   const dispatch = useAppDispatch();

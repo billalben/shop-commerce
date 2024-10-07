@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import actLikeToggle from "./act/actLikeToggle";
 import actGetWishlist from "./act/actGetWishlist";
-import { authLogout } from "@store/auth/authSlice";
-import { TProduct, TLoading, isString } from "@types";
+import { authLogout } from "@/store/auth/authSlice";
+import { TProduct, TLoading, isString } from "@/types";
 
 interface IWishlist {
   itemsId: number[];

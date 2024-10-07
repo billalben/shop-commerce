@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { axiosErrorHandler } from "@utils";
-import { TProduct } from "@types";
-import { RootState } from "@store/index";
+import { axiosErrorHandler } from "@/utils";
+import { TProduct } from "@/types";
+import { RootState } from "@/store/index";
 
 const actGetWishlist = createAsyncThunk(
   "wishlist/actGetWishlist",

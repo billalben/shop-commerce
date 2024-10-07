@@ -1,10 +1,9 @@
 import ContentLoader from "react-content-loader";
-import { Row, Col } from "react-bootstrap";
 
 const CartSkeleton = () => {
   return (
-    <Row>
-      <Col>
+    <div>
+      <div>
         <ContentLoader
           speed={2}
           width={500}
@@ -18,8 +17,8 @@ const CartSkeleton = () => {
           <rect x="141" y="19" rx="3" ry="3" width="86" height="9" />
           <rect x="140" y="141" rx="0" ry="0" width="96" height="37" />
         </ContentLoader>
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 

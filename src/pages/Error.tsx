@@ -1,20 +1,20 @@
-import { LottieHandler } from "@components/feedback";
+import { LottieHandler } from "@/components/feedback";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Container } from "react-bootstrap";
 
 const Error = () => {
   return (
-    <Container>
-      <div
-        className="d-flex flex-column align-items-center"
-        style={{ marginTop: "15%" }}
-      >
+    <div className="container">
+      <div className="mt[15%] flex h-screen gap-3 flex-col items-center justify-center">
         <LottieHandler type="notFound" />
-        <Link to="/" replace={true}>
-          How about going back to safety?
-        </Link>
+        How about going back to safety?
+        <Button variant="outline" asChild>
+          <Link to="/" replace={true}>
+            Go Home
+          </Link>
+        </Button>
       </div>
-    </Container>
+    </div>
   );
 };
 

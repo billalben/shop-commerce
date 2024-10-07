@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import actAuthRegister from "./act/actAuthRegister";
 import actAuthLogin from "./act/actAuthLogin";
-import { TLoading, isString } from "@types";
+import { TLoading, isString } from "@/types";
 
 interface IAuthState {
   user: {

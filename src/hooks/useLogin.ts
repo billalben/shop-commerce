@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { actAuthLogin, resetUI } from "@store/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { actAuthLogin, resetUI } from "@/store/auth/authSlice";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signInSchema, signInType } from "@validations/signInSchema";
+import { signInSchema, signInType } from "@/validations/signInSchema";
 
 const useLogin = () => {
   const dispatch = useAppDispatch();
@@ -15,11 +15,15 @@ const useLogin = () => {
 
   const { error, loading, token } = useAppSelector((state) => state.auth);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors: formErrors },
-  } = useForm<signInType>({
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors: formErrors },
+  // } = useForm<signInType>({
+  //   mode: "onBlur",
+  //   resolver: zodResolver(signInSchema),
+  // });
+  const form = useForm<signInType>({
     mode: "onBlur",
     resolver: zodResolver(signInSchema),
   });
@@ -44,11 +48,9 @@ const useLogin = () => {
     error,
     loading,
     token,
-    formErrors,
     searchParams,
-    register,
-    handleSubmit,
     submitForm,
+    form,
   };
 };
 

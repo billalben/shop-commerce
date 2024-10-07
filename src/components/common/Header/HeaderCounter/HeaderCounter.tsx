@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import styles from "./styles.module.css";
-import { Stack } from "react-bootstrap";
-
 type HeaderCounterProps = {
   totalQuantity: number;
   svgIcon: React.ReactNode;
   title: string;
   to: string;
 };
-
-const { totalNum, pumpAnimate } = styles;
 
 const HeaderCounter = ({
   totalQuantity,
@@ -21,7 +16,7 @@ const HeaderCounter = ({
 }: HeaderCounterProps) => {
   const navigate = useNavigate();
   const [isAnimate, setIsAnimate] = useState(false);
-  const quantityStyle = `${totalNum} ${isAnimate ? pumpAnimate : ""}`;
+  const quantityStyle = `${isAnimate ? "animate" : ""}`;
 
   useEffect(() => {
     if (!totalQuantity) return;
@@ -36,15 +31,21 @@ const HeaderCounter = ({
   }, [totalQuantity]);
 
   return (
-    <Stack direction="horizontal" role="button" gap={1} className={`border-end pe-2`} onClick={() => navigate(to)}>
-      <div className='position-relative'>
+    <div className="flex items-center gap-1 pb-1 border-b cursor-pointer" onClick={() => navigate(to)}>
+      <div className="relative">
         {svgIcon}
         {totalQuantity > 0 && (
-          <div className={quantityStyle}>{totalQuantity}</div>
+          <div
+            className={`
+            bg-blue-400 h-5 w-5 rounded-full text-center border absolute top-[-10px] right-[1px] text-xs
+            ${quantityStyle}`}
+          >
+            {totalQuantity}
+          </div>
         )}
       </div>
-      <h3 className="fs-6 fw-light mb-0">{title}</h3>
-    </Stack>
+      <h3 className="mb-0 text-base font-light">{title}</h3>
+    </div>
   );
 };
 

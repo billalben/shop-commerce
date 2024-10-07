@@ -1,15 +1,24 @@
 import { memo, useEffect, useState } from "react";
-import { useAppDispatch } from "@store/hooks";
-import { actLikeToggle } from "@store/wishlist/wishlistSlice";
-import { addToCart } from "@store/cart/cartSlice";
-import Like from "@assets/svg/like.svg?react";
-import LikeFill from "@assets/svg/like-fill.svg?react";
-import { Button, Modal, Spinner } from "react-bootstrap";
-import { TProduct } from "@types";
+import { useAppDispatch } from "@/store/hooks";
+import { actLikeToggle } from "@/store/wishlist/wishlistSlice";
+import { addToCart } from "@/store/cart/cartSlice";
+import Like from "@/assets/svg/like.svg?react";
+import LikeFill from "@/assets/svg/like-fill.svg?react";
+import { Button } from "@/components/ui/button";
+import { TProduct } from "@/types";
 
-import styles from "./styles.module.css";
 import ProductInfo from "../ProductInfo/ProductInfo";
-const { wishlistBtn } = styles;
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Link } from "react-router-dom";
+import Spinner from "@/components/Spinner";
 
 const Product = memo(
   ({
@@ -61,40 +70,50 @@ const Product = memo(
 
     return (
       <>
-        <Modal centered show={showModal} onHide={() => setShowModal(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Login Required</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            You need to login first to add this item to your wishlist.
-          </Modal.Body>
-        </Modal>
+        <Dialog
+          open={showModal}
+          onOpenChange={(isOpen) => {
+            setShowModal(isOpen);
+          }}
+        >
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Login Required</DialogTitle>
+              <DialogDescription>
+                You need to login first to add this item to your wishlist.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button variant="default" asChild>
+                <Link to="/login">Login</Link>
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         <ProductInfo title={title} price={price} img={img} direction="column">
-          <div className={wishlistBtn} onClick={likeToggleHandler}>
-            {isLoading ? (
-              <Spinner animation="border" size="sm" variant="primary" />
-            ) : isLiked ? (
-              <LikeFill />
-            ) : (
-              <Like />
-            )}
+          <div
+            className="absolute flex items-center justify-center p-1 bg-transparent rounded-full cursor-pointer right-3 top-3 h-9 w-9 hover:shadow-sm"
+            onClick={likeToggleHandler}
+          >
+            {isLoading ? <Spinner /> : isLiked ? <LikeFill /> : <Like />}
           </div>
 
-          <p className="fs-6 mb-3 text-secondary">
+          <p className="mb-3 text-sm text-gray-500">
             {quantityReachedToMax
               ? "You reached to the limit"
               : `You can add ${currentRemainingQuantity} item(s)`}
           </p>
+
           <Button
-            variant="primary"
-            style={{ color: "white" }}
+            className="flex gap-2 text-white"
             onClick={addToCartHandler}
             disabled={isBtnDisabled || quantityReachedToMax}
           >
             {isBtnDisabled ? (
               <>
-                <Spinner animation="border" size="sm" /> Loading...
+                <Spinner />
+                <span>Loading...</span>
               </>
             ) : (
               "Add to cart"
@@ -103,6 +122,6 @@ const Product = memo(
         </ProductInfo>
       </>
     );
-  }
+  },
 );
 export default Product;

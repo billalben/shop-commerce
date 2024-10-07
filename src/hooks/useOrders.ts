@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { actGetOrders, resetOrderStatus } from "@store/orders/ordersSlice";
-import { TProduct } from "@types";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { actGetOrders, resetOrderStatus } from "@/store/orders/ordersSlice";
+import { TProduct } from "@/types";
 
 const useOrders = () => {
   const dispatch = useAppDispatch();
