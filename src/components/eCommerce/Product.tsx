@@ -7,7 +7,7 @@ import LikeFill from "@/assets/svg/like-fill.svg?react";
 import { Button } from "@/components/ui/button";
 import { TProduct } from "@/types";
 
-import ProductInfo from "../ProductInfo/ProductInfo";
+import ProductInfo from "./ProductInfo";
 
 import {
   Dialog,
@@ -18,7 +18,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Link } from "react-router-dom";
-import Spinner from "@/components/Spinner";
+import { Spinner } from "@/components/feedback";
 
 const Product = memo(
   ({
@@ -93,7 +93,7 @@ const Product = memo(
 
         <ProductInfo title={title} price={price} img={img} direction="column">
           <div
-            className="absolute flex items-center justify-center p-1 bg-transparent rounded-full cursor-pointer right-3 top-3 h-9 w-9 hover:shadow-sm"
+            className="absolute right-3 top-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-transparent p-1 hover:shadow-sm"
             onClick={likeToggleHandler}
           >
             {isLoading ? <Spinner /> : isLiked ? <LikeFill /> : <Like />}

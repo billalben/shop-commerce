@@ -16,7 +16,6 @@ const HeaderCounter = ({
 }: HeaderCounterProps) => {
   const navigate = useNavigate();
   const [isAnimate, setIsAnimate] = useState(false);
-  const quantityStyle = `${isAnimate ? "animate" : ""}`;
 
   useEffect(() => {
     if (!totalQuantity) return;
@@ -38,13 +37,13 @@ const HeaderCounter = ({
           <div
             className={`
             bg-blue-400 h-5 w-5 rounded-full text-center border absolute top-[-10px] right-[1px] text-xs
-            ${quantityStyle}`}
+            ${isAnimate ? "animate-pump" : ""}`}
           >
             {totalQuantity}
           </div>
         )}
       </div>
-      <h3 className="mb-0 text-base font-light">{title}</h3>
+      <h3 className="mb-0 text-base font-light select-none">{title}</h3>
     </div>
   );
 };

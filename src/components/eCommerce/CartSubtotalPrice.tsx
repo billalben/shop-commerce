@@ -12,7 +12,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import Spinner from "@/components/Spinner";
+import { Spinner } from "@/components/feedback";
 
 type CartSubtotalPriceProps = {
   products: TProduct[];
@@ -92,7 +92,7 @@ const CartSubtotalPrice = ({
         </DialogContent>
       </Dialog>
 
-      <div className="flex justify-between mb-5">
+      <div className="mb-5 flex justify-between">
         <span>Subtotal:</span>
         <span>{subtotal.toFixed(2)} DZD</span>
       </div>
@@ -100,7 +100,7 @@ const CartSubtotalPrice = ({
       {userAccessToken && (
         <Button
           onClick={modalHandler}
-          className="block font-semibold text-white ms-auto"
+          className="ms-auto block font-semibold text-white"
         >
           Place Order
         </Button>

@@ -1,7 +1,0 @@
-.headerLogo svg path {
-  transition: fill 0.3s;
-}
-
-.headerLogo:hover svg path {
-  fill: #f00;
-}

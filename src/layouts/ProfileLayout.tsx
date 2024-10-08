@@ -2,9 +2,10 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 
 const ProfileLayout = () => {
   const location = useLocation();
+
   return (
     <div className="flex flex-col gap-4 p-4 md:flex-row">
-      <nav className="border md:basis-48">
+      <nav className="self-start border md:basis-48">
         <NavLink
           to=""
           className={`block px-4 py-2 text-black ${

@@ -1,6 +1,6 @@
 import { Category } from "@/components/eCommerce";
 import { Loading } from "@/components/feedback";
-import GridList from "@/components/common/GridList/GridList";
+import GridList from "@/components/common/GridList";
 import { TCategory } from "@/types";
 import { Heading } from "@/components/common";
 import useCategories from "@/hooks/useCategories";

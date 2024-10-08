@@ -9,6 +9,7 @@ interface IAuthState {
     email: string;
     firstName: string;
     lastName: string;
+    imageProfile: string;
   } | null;
   token: string | null;
   loading: TLoading;

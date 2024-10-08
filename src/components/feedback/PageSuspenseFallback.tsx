@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import LottieHandler from "../LottieHandler/LottieHandler";
+import LottieHandler from "./LottieHandler";
 
 const PageSuspenseFallback = ({ children }: { children: React.ReactNode }) => {
   return (

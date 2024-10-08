@@ -16,14 +16,13 @@ const lottieFilesMap = {
 type LottieHandlerProps = {
   type: keyof typeof lottieFilesMap;
   message?: string;
-  // className?: string;
 };
 
 const LottieHandler = ({ type, message }: LottieHandlerProps) => {
   const lottie = lottieFilesMap[type];
 
   return (
-    <div className={`flex flex-col items-center w-full`}>
+    <div className="flex flex-col items-center justify-center col-span-full">
       <Lottie animationData={lottie} className="w-64 max-w-96" />
       {message && <h3 className="mt-5 text-xl tracking-widest">{message}</h3>}
     </div>

@@ -13,25 +13,17 @@ import {
 import { Link } from "react-router-dom";
 
 type TProps = {
-  firstName?: string;
-  lastName?: string;
+  imageProfile: string;
   handleLogout?: () => void;
 };
 
-export function DropdownMenuDemo({
-  firstName,
-  handleLogout,
-}: TProps) {
+export function DropdownMenuDemo({ imageProfile, handleLogout }: TProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        {/* <Button variant="outline"> */}
-        <span className="text-white">
-          Welcome: {firstName}
-        </span>
-        {/* </Button> */}
+          <img src={imageProfile} className="w-8 h-8" alt="image profile" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-28">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>

@@ -54,6 +54,17 @@ export default {
           5: "hsl(var(--chart-5))",
         },
       },
+      animation: {
+        pump: "pump 300ms ease-out",
+      },
+      keyframes: {
+        pump: {
+          "0%, 100%": { transform: "scale(1)" },
+          "20%": { transform: "scale(0.8)" },
+          "40%": { transform: "scale(1.1)" },
+          "60%": { transform: "scale(1.7)" },
+        },
+      },
     },
   },
   plugins: [import("tailwindcss-animate")],

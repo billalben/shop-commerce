@@ -2,6 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 
 type TStatus = "idle" | "checking" | "available" | "notAvailable" | "failed";
+type TCheckEmailResponse = {
+  message: string;
+  exists?: boolean;
+};
 
 const useCheckEmailAvailability = () => {
   const [emailAvailabilityStatus, setEmailAvailabilityStatus] =
@@ -13,7 +17,9 @@ const useCheckEmailAvailability = () => {
     setEmailAvailabilityStatus("checking");
 
     try {
-      const response = await axios.get(`/users?email=${email}`);
+      const response = await axios.get<TCheckEmailResponse>(
+        `/users?email=${email}`,
+      );
 
       // Check if the response has the exists key
       if (response.data.exists === true) {
@@ -21,8 +27,8 @@ const useCheckEmailAvailability = () => {
       } else {
         setEmailAvailabilityStatus("available");
       }
-    } catch (error) {
-      // setEmailAvailabilityStatus("failed");
+    } catch {
+      setEmailAvailabilityStatus("failed");
     }
   };
 

@@ -33,8 +33,6 @@ const Orders = () => {
     closeModalHandler,
   } = useOrders();
 
-  console.log(selectedProduct, showModal, closeModalHandler);
-
   const totalPrices = orderList.reduce((acc, order) => acc + order.subtotal, 0);
 
   return (

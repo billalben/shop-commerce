@@ -1,10 +1,13 @@
-import CategorySkeleton from "../skeletons/CategorySkeleton/CategorySkeleton";
-import ProductSkeleton from "../skeletons/ProductSkeleton/ProductSkeleton";
-import CartSkeleton from "../skeletons/CartSkeleton/CartSkeleton";
-import LottieHandler from "../LottieHandler/LottieHandler";
+// import {CategorySkeleton} from "../skeletons";
+// import ProductSkeleton from "../skeletons/ProductSkeleton/ProductSkeleton";
+// import CartSkeleton from "./skeletons/CartSkeleton";
+// import LottieHandler from "../LottieHandler/LottieHandler";
+
+import { CategorySkeleton, ProductSkeleton, CartSkeleton } from "./skeletons";
+import LottieHandler from "./LottieHandler";
 
 import { TLoading } from "@/types";
-import TableSkeleton from "../TableSkeleton/TableSkeleton";
+import TableSkeleton from "./skeletons/TableSkeleton";
 
 const skeletonsTypes = {
   category: CategorySkeleton,

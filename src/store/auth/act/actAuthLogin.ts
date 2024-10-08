@@ -13,6 +13,7 @@ type TResponse = {
     email: string;
     firstName: string;
     lastName: string;
+    imageProfile: string;
   };
   token: string;
 };

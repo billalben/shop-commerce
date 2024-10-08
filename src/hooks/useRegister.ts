@@ -58,9 +58,6 @@ const useRegister = () => {
   }, [dispatch]);
 
   const getEmailErrorMessage = () => {
-    // if (form.formState.errors.email?.message)
-    //   return form.formState.errors.email;
-
     const fieldError = form.formState.errors.email?.message;
 
     if (fieldError) {

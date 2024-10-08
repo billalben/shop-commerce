@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { TProduct } from "@/types";
-import ProductInfo from "../ProductInfo/ProductInfo";
+import ProductInfo from "./ProductInfo";
 import { Button } from "@/components/ui/button";
 
 import {

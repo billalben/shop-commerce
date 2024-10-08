@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Spinner from "@/components/Spinner";
+import { Spinner } from "@/components/feedback";
 
 const Register = () => {
   const {

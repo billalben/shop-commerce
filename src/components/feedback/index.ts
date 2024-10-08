@@ -1,5 +1,6 @@
-import Loading from "./Loading/Loading";
-import LottieHandler from "./LottieHandler/LottieHandler";
-import PageSuspenseFallback from "./PageSuspenseFallback/PageSuspenseFallback";
+import Loading from "./Loading";
+import LottieHandler from "./LottieHandler";
+import PageSuspenseFallback from "./PageSuspenseFallback";
+import Spinner from "./Spinner";
 
-export { Loading, LottieHandler, PageSuspenseFallback };
+export { Loading, LottieHandler, PageSuspenseFallback, Spinner };

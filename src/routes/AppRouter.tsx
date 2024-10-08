@@ -2,8 +2,8 @@ import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // layouts
-const MainLayout = lazy(() => import("@/layouts/MainLayout/MainLayout"));
-import ProfileLayout from "@/layouts/ProfileLayout/ProfileLayout";
+const MainLayout = lazy(() => import("@/layouts/MainLayout"));
+import ProfileLayout from "@/layouts/ProfileLayout";
 
 // components
 import { PageSuspenseFallback } from "@/components/feedback";

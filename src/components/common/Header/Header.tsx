@@ -1,12 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import HeaderLeftBar from "./HeaderLeftBar/HeaderLeftBar";
+import HeaderLeftBar from "./HeaderLeftBar";
 import LogoIcon from "@/assets/svg/logo.svg?react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { authLogout } from "@/store/auth/authSlice";
 import { useEffect } from "react";
 import { actGetWishlist } from "@/store/wishlist/wishlistSlice";
-import { DropdownMenuDemo } from "@/components/DropdownMenu";
-// pathname
+import { DropdownMenuDemo } from "@/components/common/Header/DropdownMenu";
 
 const Header = () => {
   const location = useLocation();
@@ -81,8 +80,7 @@ const Header = () => {
             ) : (
               <DropdownMenuDemo
                 handleLogout={handleLogout}
-                firstName={user?.firstName}
-                lastName={user?.lastName}
+                imageProfile={user?.imageProfile || ""}
               />
             )}
           </li>

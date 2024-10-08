@@ -3,9 +3,9 @@ import { Header, Footer } from "@/components/common";
 
 function MainLayout() {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="container px-2 my-3 min-h-[calc(100vh-158px)]">
+      <div className="container flex-grow px-2 my-3 min-h-[calc(100vh-158px)]">
         <Outlet />
       </div>
       <Footer />
