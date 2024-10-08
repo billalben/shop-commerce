@@ -26,13 +26,13 @@ const Header = () => {
 
   return (
     <header>
-      <div className="container flex items-center justify-between py-3">
+      <div className="container flex items-center justify-between px-2 py-3">
         <Link
           to="/"
           className="flex items-center gap-1 text-black no-underline"
         >
           <LogoIcon title="logo" />
-          <h2 className="m-0 text-base font-bold capitalize tracking-widest">
+          <h2 className="m-0 text-base font-bold tracking-widest capitalize">
             Shop
           </h2>
         </Link>
@@ -40,8 +40,8 @@ const Header = () => {
         <HeaderLeftBar />
       </div>
 
-      <nav className="bg-gray-900">
-        <ul className="container flex rounded-lg bg-gray-900 p-0 font-medium">
+      <nav className="px-2 bg-gray-900">
+        <ul className="container flex p-0 font-medium bg-gray-900 rounded-lg">
           <li>
             <Link
               to="/"
@@ -60,7 +60,7 @@ const Header = () => {
               Categories
             </Link>
           </li>
-          <li className="ml-auto flex">
+          <li className="flex ml-auto">
             {!token ? (
               <>
                 <Link

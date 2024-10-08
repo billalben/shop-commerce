@@ -5,7 +5,7 @@ function MainLayout() {
   return (
     <div>
       <Header />
-      <div className="container my-3 min-h-[calc(100vh-158px)]">
+      <div className="container px-2 my-3 min-h-[calc(100vh-158px)]">
         <Outlet />
       </div>
       <Footer />
