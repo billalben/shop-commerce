@@ -26,7 +26,7 @@ const rootPersistConfig = {
 const authPersistConfig = {
   key: "auth",
   storage,
-  whiteList: ["user", "token"],
+  whiteList: ["user", "token", "expiry"],
 };
 
 const cartPersistConfig = {

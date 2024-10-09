@@ -11,7 +11,7 @@ const actLikeToggle = createAsyncThunk(
 
     try {
       const isRecordExist = await axios.get(
-        `/wishlist?userId=${auth.user?._id}&productId=${id}`
+        `/wishlist?userId=${auth.user?._id}&productId=${id}`,
       );
 
       if (isRecordExist.data !== null) {
@@ -27,7 +27,7 @@ const actLikeToggle = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(axiosErrorHandler(error));
     }
-  }
+  },
 );
 
 export default actLikeToggle;

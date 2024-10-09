@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import actPlaceOrder from "./act/actPlaceOrder";
 import actGetOrders from "./act/actGetOrders";
 import { TLoading, TOrderItem, isString } from "@/types";
+import { actAuthLogout } from "../auth/authSlice";
 
 interface IOrderSlice {
   orderList: TOrderItem[];
@@ -41,7 +42,7 @@ const orderSlice = createSlice({
           state.loading = "failed";
 
           if (isString(action.payload)) state.error = action.payload;
-        }
+        },
       )
 
       // Get orders
@@ -54,7 +55,7 @@ const orderSlice = createSlice({
         (state, action: PayloadAction<TOrderItem[]>) => {
           state.loading = "succeeded";
           state.orderList = action.payload;
-        }
+        },
       )
       .addCase(
         actGetOrders.rejected,
@@ -63,8 +64,13 @@ const orderSlice = createSlice({
 
           if (isString(action.payload)) state.error = action.payload;
           else state.error = "An unexpected error occurred";
-        }
-      );
+        },
+      )
+
+      // clean order list after logout
+      .addCase(actAuthLogout.fulfilled, (state) => {
+        state.orderList = [];
+      });
   },
 });
 

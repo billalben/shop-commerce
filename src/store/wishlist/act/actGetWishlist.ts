@@ -13,12 +13,7 @@ const actGetWishlist = createAsyncThunk(
     try {
       const userWishlist = await axios.get<{ productId: number }[]>(
         `/wishlist?userId=${auth.user?._id}`,
-        {
-          signal,
-          // headers: {
-          //   Authorization: `Bearer ${auth.token}`,
-          // },
-        }
+        { signal },
       );
 
       if (!userWishlist.data.length) {
@@ -34,14 +29,14 @@ const actGetWishlist = createAsyncThunk(
           .join(",");
 
         const response = await axios.get<TProduct[]>(
-          `/products?ids=${concatenatedItemsId}`
+          `/products?ids=${concatenatedItemsId}`,
         );
         return { data: response.data, dataType: "ProductsFullInfo" };
       }
     } catch (error) {
       return rejectWithValue(axiosErrorHandler(error));
     }
-  }
+  },
 );
 
 export default actGetWishlist;

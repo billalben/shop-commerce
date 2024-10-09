@@ -1,26 +1,48 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import HeaderLeftBar from "./HeaderLeftBar";
 import LogoIcon from "@/assets/svg/logo.svg?react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { authLogout } from "@/store/auth/authSlice";
+import { actAuthLogout } from "@/store/auth/authSlice";
 import { useEffect } from "react";
 import { actGetWishlist } from "@/store/wishlist/wishlistSlice";
 import { DropdownMenuDemo } from "@/components/common/Header/DropdownMenu";
+import { useToast } from "@/hooks/use-toast";
 
 const Header = () => {
+  const { toast } = useToast();
   const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { token, user } = useAppSelector((state) => state.auth);
+  const { token, user, expiry } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (token) {
       dispatch(actGetWishlist("ProductIds"));
     }
-  }, [dispatch, token]);
 
-  const handleLogout = () => {
-    dispatch(authLogout());
+    if (expiry && Date.now() >= expiry) {
+      dispatch(actAuthLogout());
+    }
+  }, [dispatch, token, expiry]);
+
+  const handleLogout = async () => {
+    try {
+      const result = await dispatch(actAuthLogout()).unwrap();
+
+      toast({
+        title: "Success",
+        description: result,
+      });
+
+      navigate("/");
+    } catch {
+      toast({
+        title: "Error",
+        description: "Something went wrong",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
