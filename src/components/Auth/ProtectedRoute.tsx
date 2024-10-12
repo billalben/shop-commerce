@@ -4,7 +4,7 @@ import { useAppSelector } from "@/store/hooks";
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { expiry } = useAppSelector((state) => state.auth);
 
-  if (expiry && Date.now() >= expiry) {
+  if (!expiry || Date.now() >= expiry) {
     return <Navigate to="/login?message=login_required" />;
   }
 
