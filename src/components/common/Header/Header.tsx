@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { actGetWishlist } from "@/store/wishlist/wishlistSlice";
 import { DropdownMenuDemo } from "@/components/common/Header/DropdownMenu";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const { toast } = useToast();
@@ -66,7 +67,10 @@ const Header = () => {
           <li>
             <Link
               to="/"
-              className={`block px-4 py-2 text-white ${location.pathname === "/" ? "bg-blue-600" : ""}`}
+              className={cn(
+                "block px-4 py-2 text-white",
+                location.pathname === "/" && "bg-blue-600",
+              )}
               aria-current="page"
             >
               Home
@@ -75,7 +79,10 @@ const Header = () => {
           <li>
             <Link
               to="/categories"
-              className={`block px-4 py-2 text-white ${location.pathname === "/categories" ? "bg-blue-600" : ""}`}
+              className={cn(
+                "block px-4 py-2 text-white",
+                location.pathname === "/categories" && "bg-blue-600",
+              )}
               aria-current="page"
             >
               Categories
@@ -86,14 +93,20 @@ const Header = () => {
               <>
                 <Link
                   to="/login"
-                  className={`block px-4 py-2 text-white ${location.pathname === "/login" ? "bg-blue-600" : ""}`}
+                  className={cn(
+                    "block px-4 py-2 text-white",
+                    location.pathname === "/login" && "bg-blue-600",
+                  )}
                   aria-current="page"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className={`block px-4 py-2 text-white ${location.pathname === "/register" ? "bg-blue-600" : ""}`}
+                  className={cn(
+                    "block px-4 py-2 text-white",
+                    location.pathname === "/register" && "bg-blue-600",
+                  )}
                   aria-current="page"
                 >
                   Register

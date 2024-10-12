@@ -86,7 +86,7 @@ const Login = () => {
           <div className="text-end">
             {/* if you don't have an account, register  */}
             Don't have an account?{" "}
-            <Link to="/register" className="cursor-pointer hover:underline">
+            <Link to="/register" className="font-semibold transition-colors cursor-pointer hover:underline hover:text-blue-500">
               Register
             </Link>
           </div>

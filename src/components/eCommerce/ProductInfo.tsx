@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 type ProductInfoProps = {
   title: string;
   img: string;
@@ -18,21 +20,40 @@ const ProductInfo = ({
 }: ProductInfoProps) => {
   return (
     <div
-      className={`${direction === "row" ? "mt-2 flex" : "relative flex flex-1 flex-col justify-between overflow-hidden rounded-lg border"}`}
+      className={cn(
+        "flex",
+        direction === "row"
+          ? "mt-2"
+          : "relative flex-1 flex-col justify-between overflow-hidden rounded-lg border",
+      )}
     >
-      <div className={`${direction === "column" && "block bg-gray-300"}`}>
+      <div className={cn(direction === "column" && "block bg-gray-300")}>
         <img
           src={img}
-          className={`${direction === "row" ? "block h-44 shrink-0" : "h-full max-h-72 w-full border-b object-cover object-center"}`}
+          className={cn(
+            "object-cover object-center",
+            direction === "row"
+              ? "block h-44 max-w-44"
+              : "h-full max-h-72 w-full border-b",
+          )}
           alt={title}
         />
       </div>
       <div
-        className={`${direction === "row" ? "ml-2 flex w-36 flex-1 flex-col" : "w-full px-4 pb-4 pt-2"}`}
+        className={cn(
+          direction === "row"
+            ? "ml-2 flex w-36 flex-1 flex-col"
+            : "w-full px-4 pb-4 pt-2",
+        )}
       >
         <h2
           title={title}
-          className={`text-lg text-black mb-3 ${direction === "row" ? "w-full" : "mt-2 w-full overflow-hidden truncate"}`}
+          className={cn(
+            "mb-3 text-lg text-black",
+            direction === "row"
+              ? "w-full"
+              : "mt-2 w-full overflow-hidden truncate",
+          )}
         >
           {title}
         </h2>

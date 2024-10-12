@@ -146,8 +146,8 @@ const Register = () => {
           {error && <p className="mt-3 text-[#DC3545]">{error}</p>}
           <div className="text-end">
             {/* if you have an account, Login  */}
-            Already have an account?
-            <Link to="/login" className="cursor-pointer hover:underline">
+            Already have an account? {" "}
+            <Link to="/login" className="font-semibold transition-colors cursor-pointer hover:underline hover:text-blue-500">
               Login
             </Link>
           </div>

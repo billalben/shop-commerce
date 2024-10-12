@@ -2,26 +2,25 @@ import ContentLoader from "react-content-loader";
 
 const ProductSkeleton = () => {
   const skeletons = Array.from({ length: 3 }, (_, idx) => (
-    <div key={idx} className="flex justify-center p-2">
-      <ContentLoader
-        speed={2}
-        width={190}
-        height={300}
-        viewBox="0 0 190 300"
-        backgroundColor="#f0f0f0"
-        foregroundColor="#d6d6d6"
-      >
-        <rect x="32" y="179" rx="3" ry="3" width="105" height="8" />
-        <rect x="31" y="4" rx="0" ry="0" width="119" height="162" />
-        <rect x="32" y="199" rx="3" ry="3" width="86" height="9" />
-        <rect x="32" y="220" rx="3" ry="3" width="86" height="9" />
-        <rect x="31" y="239" rx="0" ry="0" width="118" height="22" />
-      </ContentLoader>
-    </div>
+    <ContentLoader
+      key={idx}
+      speed={2}
+      width={304}
+      height={454}
+      viewBox="0 0 304 454"
+      backgroundColor="#f0f0f0"
+      foregroundColor="#d6d6d6"
+    >
+      <rect x="0" y="0" rx="10" ry="10" width="302" height="288" />
+      <rect x="10" y="297" rx="10" ry="10" width="277" height="14" />
+      <rect x="10" y="325" rx="10" ry="10" width="156" height="14" />
+      <rect x="10" y="349" rx="10" ry="10" width="156" height="14" />
+      <rect x="10" y="398" rx="10" ry="10" width="133" height="36" />
+    </ContentLoader>
   ));
 
   return (
-    <div className="grid justify-center gap-2 grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+    <div className="grid justify-center gap-2 overflow-hidden sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {skeletons}
     </div>
   );
