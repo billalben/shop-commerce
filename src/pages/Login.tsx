@@ -22,21 +22,31 @@ const Login = () => {
   const { error, loading, token, searchParams, submitForm, form } = useLogin();
 
   useEffect(() => {
-    if (searchParams.get("message") === "login_required") {
+    const message = searchParams.get("message");
+
+    if (message === "login_required") {
       toast({
         title: "You need to login to view this content",
         description: "Please login to view this content",
         variant: "destructive",
       });
-    }
-
-    if (searchParams.get("message") === "account_created") {
+    } else if (message === "account_created") {
       toast({
         title: "Account created successfully",
         description: "You can now login to your account",
       });
     }
   }, [searchParams, toast]);
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Error",
+        description: error,
+        variant: "destructive",
+      });
+    }
+  }, [error, toast]);
 
   if (token) return <Navigate to="/" />;
 
@@ -78,7 +88,6 @@ const Login = () => {
             )}
           />
 
-          {error && <p className="mt-3 text-[#DC3545]">{error}</p>}
           <Button type="submit">
             {loading === "pending" ? "Loading..." : "Login"}
           </Button>
@@ -86,7 +95,10 @@ const Login = () => {
           <div className="text-end">
             {/* if you don't have an account, register  */}
             Don't have an account?{" "}
-            <Link to="/register" className="font-semibold transition-colors cursor-pointer hover:underline hover:text-blue-500">
+            <Link
+              to="/register"
+              className="font-semibold transition-colors cursor-pointer hover:text-blue-500 hover:underline"
+            >
               Register
             </Link>
           </div>
